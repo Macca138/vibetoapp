@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { WorkflowProgress } from '@/lib/workflow/types';
 
 interface ProgressBarProps {
@@ -21,7 +21,7 @@ export default function ProgressBar({ progress, className = '' }: ProgressBarPro
       </div>
       
       <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-        <motion.div
+        <m.div
           className="h-2 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${progress.percentComplete}%` }}

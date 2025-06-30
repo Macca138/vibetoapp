@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import AnimatedButton from '../animations/AnimatedButton';
 import AnimatedInput from '../animations/AnimatedInput';
 import { scaleIn, checkmarkVariants } from '@/lib/animations';
@@ -54,20 +54,20 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
 
   if (success) {
     return (
-      <motion.div 
+      <m.div 
         className="text-center py-8"
         initial="initial"
         animate="animate"
         variants={scaleIn}
       >
-        <motion.div 
+        <m.div 
           className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         >
           <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <motion.path 
+            <m.path 
               strokeLinecap="round" 
               strokeLinejoin="round" 
               strokeWidth="2" 
@@ -77,29 +77,29 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
               animate="animate"
             />
           </svg>
-        </motion.div>
-        <motion.h3 
+        </m.div>
+        <m.h3 
           className="text-lg font-medium text-gray-900 mb-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
           You&apos;re on the list!
-        </motion.h3>
-        <motion.p 
+        </m.h3>
+        <m.p 
           className="text-sm text-gray-500"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
           We&apos;ll notify you when VibeToApp is ready for you to try.
-        </motion.p>
-      </motion.div>
+        </m.p>
+      </m.div>
     );
   }
 
   return (
-    <motion.form 
+    <m.form 
       onSubmit={handleSubmit} 
       className="mt-8 sm:flex sm:max-w-md"
       initial={{ opacity: 0, y: 20 }}
@@ -127,33 +127,33 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
           className="block w-full px-4 py-3 font-medium"
         >
           {loading ? (
-            <motion.span
+            <m.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="flex items-center justify-center"
             >
-              <motion.div
+              <m.div
                 className="w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
               />
               Joining...
-            </motion.span>
+            </m.span>
           ) : (
             'Join Waitlist'
           )}
         </AnimatedButton>
       </div>
       {error && (
-        <motion.p 
+        <m.p 
           className="mt-3 text-sm text-red-600"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
           {error}
-        </motion.p>
+        </m.p>
       )}
-    </motion.form>
+    </m.form>
   );
 }

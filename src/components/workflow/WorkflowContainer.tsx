@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
 import { getWorkflowStep } from '@/lib/workflow/config';
 import { getNavigationState, calculateProgress } from '@/lib/workflow/navigation';
@@ -173,7 +173,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <motion.div 
+      <m.div 
         className="bg-white shadow-sm border-b"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -201,12 +201,12 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
           {/* Step Navigation Sidebar */}
-          <motion.div 
+          <m.div 
             className="lg:col-span-1 mb-8 lg:mb-0"
             variants={fadeInUp}
             initial="initial"
@@ -219,7 +219,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
                 onStepClick={handleStepNavigation}
               />
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Main Content */}
           <div className="lg:col-span-3">

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import WaitlistForm from './WaitlistForm';
 import { fadeInUp, fadeIn, containerVariants } from '@/lib/animations';
 
@@ -9,37 +9,37 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 to-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <m.div 
           className="mx-auto max-w-2xl text-center"
           variants={containerVariants}
           initial="initial"
           animate="animate"
         >
-          <motion.h1 
+          <m.h1 
             className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
             variants={fadeInUp}
           >
             Transform Your App Ideas Into Reality
-          </motion.h1>
-          <motion.p 
+          </m.h1>
+          <m.p 
             className="mt-6 text-lg leading-8 text-gray-600"
             variants={fadeInUp}
           >
             VibeToApp guides you through a powerful 9-step AI-powered workflow to articulate, 
             refine, and perfect your app concept. From vague ideas to detailed specifications.
-          </motion.p>
+          </m.p>
           
           {/* Waitlist Form for Hero */}
-          <motion.div className="mt-10" variants={fadeIn}>
+          <m.div className="mt-10" variants={fadeIn}>
             <p className="text-sm font-semibold text-gray-900 mb-4">
               Join the waitlist to get early access
             </p>
             <div className="flex justify-center">
               <WaitlistForm source="hero" />
             </div>
-          </motion.div>
+          </m.div>
           
-          <motion.div 
+          <m.div 
             className="mt-6 flex items-center justify-center gap-x-6"
             variants={fadeInUp}
           >
@@ -55,8 +55,8 @@ export default function Hero() {
             >
               Already have an account?
             </Link>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
       
       {/* Background decoration */}

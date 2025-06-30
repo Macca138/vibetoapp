@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { fadeInUp, scaleIn, containerVariants } from '@/lib/animations';
 
 const features = [
@@ -55,34 +55,34 @@ export default function Features() {
   return (
     <section id="features" className="py-24 sm:py-32 bg-gray-50">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.div 
+        <m.div 
           className="mx-auto max-w-2xl text-center"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
         >
-          <motion.h2 
+          <m.h2 
             className="text-base font-semibold leading-7 text-indigo-600"
             variants={fadeInUp}
           >
             AI-Powered Workflow
-          </motion.h2>
-          <motion.p 
+          </m.h2>
+          <m.p 
             className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
             variants={fadeInUp}
           >
             Your 9-Step Journey to App Success
-          </motion.p>
-          <motion.p 
+          </m.p>
+          <m.p 
             className="mt-6 text-lg leading-8 text-gray-600"
             variants={fadeInUp}
           >
             Our proven process guides you from initial concept to development-ready specifications
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
         
-        <motion.div 
+        <m.div 
           className="mx-auto mt-16 max-w-7xl"
           initial="initial"
           whileInView="animate"
@@ -91,7 +91,7 @@ export default function Features() {
         >
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
-              <motion.div 
+              <m.div 
                 key={feature.step} 
                 className="relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group"
                 variants={scaleIn}
@@ -102,13 +102,13 @@ export default function Features() {
                 }}
               >
                 <div className="flex items-center gap-x-4">
-                  <motion.div 
+                  <m.div 
                     className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.2 }}
                   >
                     <span className="text-white font-semibold">{feature.step}</span>
-                  </motion.div>
+                  </m.div>
                   <h3 className="text-lg font-semibold leading-7 text-gray-900 group-hover:text-indigo-600 transition-colors duration-200">
                     {feature.name}
                   </h3>
@@ -116,10 +116,10 @@ export default function Features() {
                 <p className="mt-4 text-base leading-7 text-gray-600">
                   {feature.description}
                 </p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

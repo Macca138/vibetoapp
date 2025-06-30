@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useInViewAnimation } from '@/lib/animations';
 import { ReactNode } from 'react';
 import { Variants } from 'framer-motion';
@@ -21,13 +21,13 @@ export default function AnimatedContainer({
   const inViewProps = useInViewAnimation();
 
   return (
-    <motion.div
+    <m.div
       className={className}
       variants={variants}
       transition={{ delay }}
       {...inViewProps}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

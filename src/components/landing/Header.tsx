@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import AnimatedButton from '../animations/AnimatedButton';
 
@@ -15,14 +15,14 @@ export default function Header() {
       <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <motion.span 
+            <m.span 
               className="text-2xl font-bold text-indigo-600"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
             >
               VibeToApp
-            </motion.span>
+            </m.span>
           </Link>
         </div>
         
@@ -40,21 +40,21 @@ export default function Header() {
         </div>
         
         <div className="hidden lg:flex lg:gap-x-12">
-          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+          <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
             <Link href="#features" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
               Features
             </Link>
-          </motion.div>
-          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+          </m.div>
+          <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
             <Link href="#" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
               Pricing
             </Link>
-          </motion.div>
-          <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+          </m.div>
+          <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
             <Link href="#" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
               About
             </Link>
-          </motion.div>
+          </m.div>
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
@@ -67,14 +67,14 @@ export default function Header() {
             </AnimatedButton>
           ) : (
             <>
-              <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
+              <m.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
                 <Link
                   href="/auth/signin"
                   className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200"
                 >
                   Log in
                 </Link>
-              </motion.div>
+              </m.div>
               <AnimatedButton
                 onClick={() => window.location.href = '/auth/signup'}
                 className="px-4 py-2 text-sm"

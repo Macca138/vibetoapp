@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { WORKFLOW_STEPS } from '@/lib/workflow/config';
 import { getStepStatus } from '@/lib/workflow/navigation';
 import { ProjectWorkflow } from '@/lib/workflow/types';
@@ -25,7 +25,7 @@ export default function StepNavigation({
           const isClickable = status !== 'locked';
           
           return (
-            <motion.li 
+            <m.li 
               key={step.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -97,7 +97,7 @@ export default function StepNavigation({
                   )}
                 </div>
               </button>
-            </motion.li>
+            </m.li>
           );
         })}
       </ol>

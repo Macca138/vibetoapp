@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useState } from 'react';
 
 interface AnimatedInputProps {
@@ -33,7 +33,7 @@ export default function AnimatedInput({
   return (
     <div className="relative">
       {label && (
-        <motion.label
+        <m.label
           htmlFor={id}
           className="block text-sm font-medium text-gray-700 mb-2"
           initial={{ opacity: 0, y: -10 }}
@@ -41,9 +41,9 @@ export default function AnimatedInput({
           transition={{ duration: 0.3 }}
         >
           {label}
-        </motion.label>
+        </m.label>
       )}
-      <motion.input
+      <m.input
         type={type}
         name={name}
         id={id}

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { WorkflowField as WorkflowFieldType } from '@/lib/workflow/types';
 import AnimatedInput from '@/components/animations/AnimatedInput';
 
@@ -45,7 +45,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
 
       case 'textarea':
         return (
-          <motion.textarea
+          <m.textarea
             id={field.id}
             value={value as string}
             onChange={handleChange}
@@ -66,7 +66,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
 
       case 'select':
         return (
-          <motion.select
+          <m.select
             id={field.id}
             value={value as string}
             onChange={handleChange}
@@ -85,14 +85,14 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
                 {option}
               </option>
             ))}
-          </motion.select>
+          </m.select>
         );
 
       case 'multiselect':
         return (
           <div className="space-y-2">
             {field.options?.map((option) => (
-              <motion.label
+              <m.label
                 key={option}
                 className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
                 whileHover={{ scale: 1.01 }}
@@ -112,7 +112,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                 />
                 <span className="text-sm text-gray-700">{option}</span>
-              </motion.label>
+              </m.label>
             ))}
           </div>
         );
@@ -121,7 +121,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
         return (
           <div className="space-y-2">
             {field.options?.map((option) => (
-              <motion.label
+              <m.label
                 key={option}
                 className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
                 whileHover={{ scale: 1.01 }}
@@ -136,14 +136,14 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                 />
                 <span className="text-sm text-gray-700">{option}</span>
-              </motion.label>
+              </m.label>
             ))}
           </div>
         );
 
       case 'checkbox':
         return (
-          <motion.label
+          <m.label
             className="flex items-center space-x-2 cursor-pointer"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
@@ -155,7 +155,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
               className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             />
             <span className="text-sm text-gray-700">{field.label}</span>
-          </motion.label>
+          </m.label>
         );
 
       case 'number':
@@ -177,7 +177,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
   };
 
   return (
-    <motion.div
+    <m.div
       className="space-y-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -203,15 +203,15 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
       )}
       
       {error && (
-        <motion.p
+        <m.p
           className="text-sm text-red-600"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
           {error}
-        </motion.p>
+        </m.p>
       )}
-    </motion.div>
+    </m.div>
   );
 }

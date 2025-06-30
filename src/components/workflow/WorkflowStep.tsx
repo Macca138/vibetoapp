@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { WorkflowStep as WorkflowStepType, WorkflowResponse } from '@/lib/workflow/types';
 import { fadeInUp, containerVariants } from '@/lib/animations';
 import WorkflowField from './WorkflowField';
@@ -130,14 +130,14 @@ export default function WorkflowStep({
   }, [formData]);
 
   return (
-    <motion.div
+    <m.div
       className="max-w-4xl mx-auto"
       variants={containerVariants}
       initial="initial"
       animate="animate"
     >
       {/* Step Header */}
-      <motion.div className="text-center mb-8" variants={fadeInUp}>
+      <m.div className="text-center mb-8" variants={fadeInUp}>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           {step.title}
         </h1>
@@ -149,10 +149,10 @@ export default function WorkflowStep({
             {step.prompt}
           </p>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Form Fields */}
-      <motion.div className="space-y-6 mb-8" variants={fadeInUp}>
+      <m.div className="space-y-6 mb-8" variants={fadeInUp}>
         {step.fields.map((field) => (
           <WorkflowField
             key={field.id}
@@ -162,11 +162,11 @@ export default function WorkflowStep({
             error={errors[field.id]}
           />
         ))}
-      </motion.div>
+      </m.div>
 
       {/* AI Suggestions */}
       {response?.aiSuggestions && (
-        <motion.div
+        <m.div
           className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8"
           variants={fadeInUp}
         >
@@ -176,11 +176,11 @@ export default function WorkflowStep({
           <p className="text-sm text-blue-700">
             {response.aiSuggestions}
           </p>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Action Buttons */}
-      <motion.div
+      <m.div
         className="flex flex-col sm:flex-row gap-4 justify-between items-center"
         variants={fadeInUp}
       >
@@ -215,19 +215,19 @@ export default function WorkflowStep({
             {step.id === 9 ? 'Complete Workflow' : 'Next Step →'}
           </AnimatedButton>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Auto-save indicator */}
       {isSaving && (
-        <motion.div
+        <m.div
           className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
         >
           Saving...
-        </motion.div>
+        </m.div>
       )}
-    </motion.div>
+    </m.div>
   );
 }

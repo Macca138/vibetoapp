@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ReactNode } from 'react';
 import { buttonHover, buttonTap } from '@/lib/animations';
 
@@ -31,7 +31,7 @@ export default function AnimatedButton({
   const variantClasses = variantStyles[variant];
 
   return (
-    <motion.button
+    <m.button
       type={type}
       onClick={onClick}
       disabled={disabled}
@@ -41,6 +41,6 @@ export default function AnimatedButton({
       transition={{ duration: 0.2, ease: 'easeInOut' }}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }

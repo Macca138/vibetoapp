@@ -1,7 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useState } from 'react';
 
 interface SocialLoginButtonsProps {
@@ -24,7 +24,7 @@ export default function SocialLoginButtons({ callbackUrl = '/dashboard' }: Socia
 
   return (
     <div className="space-y-3">
-      <motion.button
+      <m.button
         type="button"
         onClick={() => handleSocialLogin('google')}
         disabled={loading !== null}
@@ -34,7 +34,7 @@ export default function SocialLoginButtons({ callbackUrl = '/dashboard' }: Socia
         transition={{ duration: 0.2 }}
       >
         {loading === 'google' ? (
-          <motion.div
+          <m.div
             className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -60,9 +60,9 @@ export default function SocialLoginButtons({ callbackUrl = '/dashboard' }: Socia
           </svg>
         )}
         Continue with Google
-      </motion.button>
+      </m.button>
 
-      <motion.button
+      <m.button
         type="button"
         onClick={() => handleSocialLogin('github')}
         disabled={loading !== null}
@@ -72,7 +72,7 @@ export default function SocialLoginButtons({ callbackUrl = '/dashboard' }: Socia
         transition={{ duration: 0.2 }}
       >
         {loading === 'github' ? (
-          <motion.div
+          <m.div
             className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -83,7 +83,7 @@ export default function SocialLoginButtons({ callbackUrl = '/dashboard' }: Socia
           </svg>
         )}
         Continue with GitHub
-      </motion.button>
+      </m.button>
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
