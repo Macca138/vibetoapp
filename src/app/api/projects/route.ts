@@ -9,7 +9,7 @@ const createProjectSchema = z.object({
   description: z.string().max(500, "Description is too long").optional(),
 });
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     

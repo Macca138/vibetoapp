@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import SocialLoginButtons from "./SocialLoginButtons";
 
 interface FormData {
   name: string;
@@ -121,11 +122,14 @@ export default function SignUpForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {errors.general && (
-        <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert">
-          {errors.general}
-        </div>
+    <div className="space-y-6">
+      <SocialLoginButtons callbackUrl="/dashboard" />
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {errors.general && (
+          <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert">
+            {errors.general}
+          </div>
       )}
 
       <div>
@@ -281,6 +285,7 @@ export default function SignUpForm() {
           Sign in
         </a>
       </div>
-    </form>
+      </form>
+    </div>
   );
 }

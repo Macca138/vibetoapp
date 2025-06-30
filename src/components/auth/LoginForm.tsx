@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import SocialLoginButtons from "./SocialLoginButtons";
 
 interface FormData {
   email: string;
@@ -76,7 +77,7 @@ export default function LoginForm() {
         router.push("/dashboard");
         router.refresh();
       }
-    } catch (error) {
+    } catch {
       setErrors({
         general: "An unexpected error occurred",
       });
@@ -95,12 +96,15 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {errors.general && (
-        <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert">
-          {errors.general}
-        </div>
-      )}
+    <div className="space-y-6">
+      <SocialLoginButtons callbackUrl="/dashboard" />
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {errors.general && (
+          <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded-lg" role="alert">
+            {errors.general}
+          </div>
+        )}
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -207,11 +211,12 @@ export default function LoginForm() {
       </div>
 
       <div className="text-center text-sm">
-        <span className="text-gray-600">Don't have an account?</span>{" "}
+        <span className="text-gray-600">Don&apos;t have an account?</span>{" "}
         <a href="/auth/signup" className="font-medium text-primary-600 hover:text-primary-500">
           Sign up
         </a>
       </div>
-    </form>
+      </form>
+    </div>
   );
 }
