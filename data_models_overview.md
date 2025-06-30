@@ -1,4 +1,4 @@
-# Data Models Overview
+git# Data Models Overview
 
 This document provides a consolidated overview of the core data models used in the application, defined using Prisma ORM. These models represent the primary entities and their relationships within the application's PostgreSQL database.
 
