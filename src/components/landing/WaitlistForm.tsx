@@ -61,12 +61,12 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
         variants={scaleIn}
       >
         <m.div 
-          className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4"
+          className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-purple-500/20 mb-4"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         >
-          <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <m.path 
               strokeLinecap="round" 
               strokeLinejoin="round" 
@@ -79,7 +79,7 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
           </svg>
         </m.div>
         <m.h3 
-          className="text-lg font-medium text-gray-900 mb-2"
+          className="text-lg font-medium text-white mb-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -87,7 +87,7 @@ export default function WaitlistForm({ source = 'landing' }: WaitlistFormProps) 
           You&apos;re on the list!
         </m.h3>
         <m.p 
-          className="text-sm text-gray-500"
+          className="text-sm text-gray-300"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}

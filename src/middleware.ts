@@ -8,7 +8,10 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token, req }) => {
+        // For database sessions, check if the session cookie exists
+        return !!req.cookies.get("next-auth.session-token") || !!token;
+      },
     },
   }
 );

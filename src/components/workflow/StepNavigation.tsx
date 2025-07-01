@@ -41,7 +41,7 @@ export default function StepNavigation({
                     ? 'bg-green-50 border border-green-200 hover:bg-green-100'
                     : status === 'available'
                     ? 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
-                    : 'bg-gray-25 border border-gray-100 opacity-50 cursor-not-allowed'
+                    : 'bg-gray-100 border border-gray-200 opacity-50 cursor-not-allowed'
                 }`}
               >
                 <div className="flex items-center space-x-3">

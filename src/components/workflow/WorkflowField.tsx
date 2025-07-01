@@ -54,7 +54,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
             maxLength={field.maxLength}
             minLength={field.minLength}
             rows={4}
-            className={`block w-full rounded-md border-gray-300 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 resize-vertical ${
+            className={`block w-full rounded-md border-gray-400 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 resize-vertical shadow-sm ${
               error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
             }`}
             whileFocus={{

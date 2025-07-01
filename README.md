@@ -1,8 +1,16 @@
-# SaaS AI App Development Project
+# VibeToApp - AI-Powered SaaS Idea Development Platform
 
-This repository will contain the codebase for a new SaaS application focused on guiding users through a 9-step workflow to articulate and refine their app ideas using AI assistance, manage projects, and export their work.
+This repository contains the codebase for VibeToApp, a SaaS application that guides users through a 9-step AI-powered workflow to transform app ideas into detailed specifications, manage projects, and export their work.
 
-This project is currently in the planning and initial setup phase, guided by a detailed 26-step implementation plan.
+## 📚 Documentation
+
+All project documentation is organized in the [`/docs`](./docs) folder:
+
+- **[📋 Quick Start](./docs/README.md)** - Complete documentation index
+- **[🔐 Authentication](./docs/auth/)** - OAuth setup, testing, and troubleshooting
+- **[🗄️ Database](./docs/database/)** - Supabase configuration and migration guides
+- **[🎨 UI/UX](./docs/ui/)** - Design decisions and visibility fixes
+- **[🛠️ Development](./docs/development/)** - Implementation plan, specifications, and guides
 
 ## 🚀 Project Goal
 

@@ -3,14 +3,14 @@ import WaitlistForm from './WaitlistForm';
 
 export default function CTA() {
   return (
-    <section className="bg-indigo-600">
-      <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Ready to bring your app idea to life?
+    <section className="py-24 sm:py-32">
+      <div className="px-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Ready to Plan Like a Pro?
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-indigo-100">
-            Join thousands of entrepreneurs and innovators who are turning their ideas into successful apps with VibeToApp.
+          <p className="text-xl text-gray-300 mb-8">
+            Join thousands of vibe coders who've transformed their chaotic ideas into successful projects.
           </p>
           
           {/* Waitlist Form */}
@@ -23,9 +23,9 @@ export default function CTA() {
             </div>
           </div>
           
-          <div className="mt-8 text-sm text-indigo-200">
+          <div className="mt-8 text-sm text-gray-300">
             <p>Already have an account? 
-              <Link href="/auth/signin" className="ml-2 font-semibold text-white hover:text-indigo-100">
+              <Link href="/auth/signin" className="ml-2 font-semibold text-white hover:text-purple-400">
                 Sign in <span aria-hidden="true">→</span>
               </Link>
             </p>

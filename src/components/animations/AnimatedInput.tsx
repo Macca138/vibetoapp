@@ -28,7 +28,7 @@ export default function AnimatedInput({
 }: AnimatedInputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
-  const baseClasses = 'block w-full rounded-md border-gray-300 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200';
+  const baseClasses = 'block w-full rounded-md border border-slate-600 bg-slate-800/50 px-4 py-3 text-base text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400/50 transition-all duration-200';
 
   return (
     <div className="relative">
@@ -56,13 +56,13 @@ export default function AnimatedInput({
         onBlur={() => setIsFocused(false)}
         whileFocus={{
           scale: 1.02,
-          borderColor: '#6366f1',
+          borderColor: '#a855f7',
           transition: { duration: 0.2 }
         }}
         animate={isFocused ? {
-          boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.1)',
+          boxShadow: '0 0 0 3px rgba(168, 85, 247, 0.1)',
         } : {
-          boxShadow: '0 0 0 0px rgba(99, 102, 241, 0)',
+          boxShadow: '0 0 0 0px rgba(168, 85, 247, 0)',
         }}
         transition={{ duration: 0.2 }}
       />

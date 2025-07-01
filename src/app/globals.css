@@ -3,6 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* VibeToApp Design System Colors */
+  --primary-purple: #a855f7;
+  --primary-pink: #ec4899;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --pink-600: #db2777;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
 }
 
 @theme inline {

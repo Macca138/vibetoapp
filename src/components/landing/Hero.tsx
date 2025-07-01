@@ -4,34 +4,39 @@ import Link from 'next/link';
 import { m } from 'framer-motion';
 import WaitlistForm from './WaitlistForm';
 import { fadeInUp, fadeIn, containerVariants } from '@/lib/animations';
+import { User, CheckCircle } from 'lucide-react';
 
 export default function Hero() {
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 to-white py-24 sm:py-32">
+    <section className="relative overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <m.div 
-          className="mx-auto max-w-2xl text-center"
+          className="mx-auto max-w-4xl text-center"
           variants={containerVariants}
           initial="initial"
           animate="animate"
         >
           <m.h1 
-            className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+            className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
             variants={fadeInUp}
           >
-            Transform Your App Ideas Into Reality
+            Transform Vague Ideas into{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              Concrete Plans
+            </span>
           </m.h1>
           <m.p 
-            className="mt-6 text-lg leading-8 text-gray-600"
+            className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
             variants={fadeInUp}
           >
-            VibeToApp guides you through a powerful 9-step AI-powered workflow to articulate, 
-            refine, and perfect your app concept. From vague ideas to detailed specifications.
+            Stop jumping into development without a plan. Our AI-powered 9-step methodology 
+            guides you from rough concepts to detailed, actionable project specifications.
           </m.p>
           
           {/* Waitlist Form for Hero */}
           <m.div className="mt-10" variants={fadeIn}>
-            <p className="text-sm font-semibold text-gray-900 mb-4">
+            <p className="text-sm font-semibold text-white mb-4">
               Join the waitlist to get early access
             </p>
             <div className="flex justify-center">
@@ -40,23 +45,19 @@ export default function Hero() {
           </m.div>
           
           <m.div 
-            className="mt-6 flex items-center justify-center gap-x-6"
+            className="mt-6 flex items-center justify-center"
             variants={fadeInUp}
           >
             <Link
               href="#features"
-              className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200"
+              className="text-sm font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200"
             >
               Learn more <span aria-hidden="true">→</span>
             </Link>
-            <Link
-              href="/auth/signin"
-              className="text-sm font-semibold leading-6 text-gray-600 hover:text-gray-900 transition-colors duration-200"
-            >
-              Already have an account?
-            </Link>
           </m.div>
         </m.div>
+
+
       </div>
       
       {/* Background decoration */}

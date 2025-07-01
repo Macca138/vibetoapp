@@ -6,9 +6,16 @@ import { WorkflowStep as WorkflowStepType, WorkflowResponse } from '@/lib/workfl
 import { fadeInUp, containerVariants } from '@/lib/animations';
 import WorkflowField from './WorkflowField';
 import AnimatedButton from '@/components/animations/AnimatedButton';
+import Step1ArticulateIdea from './steps/Step1ArticulateIdea';
+import Step2FleshingOut from './steps/Step2FleshingOut';
+import Step3IdentifyTargetUsers from './steps/Step3IdentifyTargetUsers';
+import Step4FeatureDiscovery from './steps/Step4FeatureDiscovery';
+import Step5UserFlowMapping from './steps/Step5UserFlowMapping';
+import Step6TechnicalArchitecture from './steps/Step6TechnicalArchitecture';
 
 interface WorkflowStepProps {
   step: WorkflowStepType;
+  projectId: string;
   response?: WorkflowResponse;
   onSave: (responses: Record<string, any>, isComplete: boolean) => Promise<void>;
   onNext?: () => void;
@@ -20,6 +27,7 @@ interface WorkflowStepProps {
 
 export default function WorkflowStep({
   step,
+  projectId,
   response,
   onSave,
   onNext,
@@ -129,6 +137,85 @@ export default function WorkflowStep({
     return () => clearInterval(interval);
   }, [formData]);
 
+  // Use custom step components
+  if (step.id === 1) {
+    return (
+      <Step1ArticulateIdea
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 2) {
+    return (
+      <Step2FleshingOut
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 3) {
+    return (
+      <Step3IdentifyTargetUsers
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 4) {
+    return (
+      <Step4FeatureDiscovery
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 5) {
+    return (
+      <Step5UserFlowMapping
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 6) {
+    return (
+      <Step6TechnicalArchitecture
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
   return (
     <m.div
       className="max-w-4xl mx-auto"
@@ -145,7 +232,7 @@ export default function WorkflowStep({
           {step.description}
         </p>
         <div className="max-w-2xl mx-auto">
-          <p className="text-base text-gray-700 bg-indigo-50 rounded-lg p-4">
+          <p className="text-base text-gray-800 bg-indigo-50 rounded-lg p-4 border border-indigo-100">
             {step.prompt}
           </p>
         </div>

@@ -21,8 +21,8 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -63,18 +63,9 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ account }) {
-      // Allow OAuth signins
-      if (account?.provider === 'google' || account?.provider === 'github') {
-        return true;
-      }
-      
-      // Allow credentials signin
-      if (account?.provider === 'credentials') {
-        return true;
-      }
-      
-      return false;
+    async signIn({ user, account, profile }) {
+      // Allow all sign-ins when using database sessions
+      return true;
     },
     async session({ session, user }) {
       if (session?.user && user) {

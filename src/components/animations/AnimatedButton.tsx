@@ -14,9 +14,9 @@ interface AnimatedButtonProps {
 }
 
 const variantStyles = {
-  primary: 'bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:outline-indigo-600',
-  secondary: 'bg-white text-indigo-600 border border-indigo-600 hover:bg-indigo-50',
-  ghost: 'text-indigo-600 hover:bg-indigo-50',
+  primary: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0',
+  secondary: 'bg-slate-800/50 border border-slate-700 text-white hover:bg-slate-800/70',
+  ghost: 'text-purple-400 hover:text-white hover:bg-purple-500/20',
 };
 
 export default function AnimatedButton({

@@ -226,6 +226,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
             <div className="bg-white shadow-sm rounded-lg p-6 lg:p-8">
               <WorkflowStep
                 step={currentStepData}
+                projectId={project.id}
                 response={currentStepResponse}
                 onSave={handleStepSave}
                 onNext={handleNext}

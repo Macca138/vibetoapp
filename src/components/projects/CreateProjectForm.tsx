@@ -87,14 +87,14 @@ export default function CreateProjectForm({
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-      <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
+      <div className="relative top-20 mx-auto p-6 border border-slate-700 w-96 shadow-xl rounded-lg bg-slate-800">
         <div className="mt-3">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Create New Project</h3>
+            <h3 className="text-lg font-medium text-white">Create New Project</h3>
             <button
               onClick={onCancel}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-white transition-colors"
               aria-label="Close"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,14 +104,14 @@ export default function CreateProjectForm({
           </div>
 
           {errors.general && (
-            <div className="mb-4 bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <div className="mb-4 bg-red-900/20 border border-red-500/50 text-red-300 px-4 py-3 rounded">
               {errors.general}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
                 Project Name *
               </label>
               <input
@@ -122,18 +122,18 @@ export default function CreateProjectForm({
                 value={formData.name}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${
-                  errors.name ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500`}
+                  errors.name ? "border-red-500" : "border-slate-600"
+                } rounded-md shadow-sm bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-colors`}
                 placeholder="My Awesome App"
                 disabled={isLoading}
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                <p className="mt-1 text-sm text-red-300">{errors.name}</p>
               )}
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-sm font-medium text-white mb-2">
                 Description (Optional)
               </label>
               <textarea
@@ -143,13 +143,13 @@ export default function CreateProjectForm({
                 value={formData.description}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${
-                  errors.description ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500`}
+                  errors.description ? "border-red-500" : "border-slate-600"
+                } rounded-md shadow-sm bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-colors resize-none`}
                 placeholder="Brief description of your project..."
                 disabled={isLoading}
               />
               {errors.description && (
-                <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+                <p className="mt-1 text-sm text-red-300">{errors.description}</p>
               )}
             </div>
 
@@ -157,7 +157,7 @@ export default function CreateProjectForm({
               <button
                 type="button"
                 onClick={onCancel}
-                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="px-4 py-2 border border-slate-600 rounded-md shadow-sm text-sm font-medium text-white bg-slate-700 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-400 transition-colors"
                 disabled={isLoading}
               >
                 Cancel
@@ -165,7 +165,7 @@ export default function CreateProjectForm({
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${
+                className={`px-4 py-2 border-0 rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-400 transition-all ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >

@@ -16,7 +16,7 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <m.span 
-              className="text-2xl font-bold text-indigo-600"
+              className="text-2xl font-bold text-white"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
@@ -41,48 +41,30 @@ export default function Header() {
         
         <div className="hidden lg:flex lg:gap-x-12">
           <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-            <Link href="#features" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
+            <Link href="#features" className="text-sm font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200">
               Features
             </Link>
           </m.div>
           <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-            <Link href="#" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
+            <Link href="#" className="text-sm font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200">
               Pricing
             </Link>
           </m.div>
           <m.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-            <Link href="#" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200">
+            <Link href="#" className="text-sm font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200">
               About
             </Link>
           </m.div>
         </div>
         
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-          {session ? (
-            <AnimatedButton
-              onClick={() => window.location.href = '/dashboard'}
-              className="px-4 py-2 text-sm"
-            >
-              Go to Dashboard
-            </AnimatedButton>
-          ) : (
-            <>
-              <m.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
-                <Link
-                  href="/auth/signin"
-                  className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-200"
-                >
-                  Log in
-                </Link>
-              </m.div>
-              <AnimatedButton
-                onClick={() => window.location.href = '/auth/signup'}
-                className="px-4 py-2 text-sm"
-              >
-                Sign up
-              </AnimatedButton>
-            </>
-          )}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <AnimatedButton
+            onClick={() => window.location.href = '#features'}
+            className="px-4 py-2 text-sm"
+            variant="secondary"
+          >
+            Learn More
+          </AnimatedButton>
         </div>
       </nav>
       
@@ -130,32 +112,13 @@ export default function Header() {
                   </Link>
                 </div>
                 <div className="py-6">
-                  {session ? (
-                    <Link
-                      href="/dashboard"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Go to Dashboard
-                    </Link>
-                  ) : (
-                    <>
-                      <Link
-                        href="/auth/signin"
-                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Log in
-                      </Link>
-                      <Link
-                        href="/auth/signup"
-                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-indigo-600 hover:bg-gray-50"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Sign up
-                      </Link>
-                    </>
-                  )}
+                  <Link
+                    href="#features"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Learn More
+                  </Link>
                 </div>
               </div>
             </div>
