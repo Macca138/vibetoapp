@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { DataFlowEngine } from '@/lib/dataFlowEngine';
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -50,6 +51,9 @@ export async function POST(request: Request, { params }: RouteParams) {
         responses: true,
       },
     });
+
+    // Create default data flow relationships for the project
+    await DataFlowEngine.createDefaultDataFlows(projectId);
 
     return NextResponse.json(workflow);
   } catch (error) {

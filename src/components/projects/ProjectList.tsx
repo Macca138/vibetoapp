@@ -1,14 +1,36 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import ProjectProgressCard from "./ProjectProgressCard";
 
-interface Project {
-  id: string;
-  name: string;
-  description: string | null;
-  createdAt: string;
-  updatedAt: string;
+interface ProjectProgress {
+  projectId: string;
+  projectName: string;
+  description?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  currentStep: number;
+  completedSteps: number;
+  totalSteps: number;
+  isCompleted: boolean;
+  completedAt?: Date;
+  estimatedTimeRemaining?: number;
+  lastActivity?: Date;
+  stepStatuses: {
+    stepId: number;
+    title: string;
+    completed: boolean;
+    hasData: boolean;
+  }[];
+}
+
+interface ProjectStats {
+  total: number;
+  completed: number;
+  inProgress: number;
+  notStarted: number;
+  completionRate: number;
 }
 
 interface ProjectListProps {
@@ -16,14 +38,16 @@ interface ProjectListProps {
 }
 
 export default function ProjectList({ onProjectCreated }: ProjectListProps) {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectProgress[]>([]);
+  const [stats, setStats] = useState<ProjectStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const fetchProjects = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/projects");
+      const response = await fetch("/api/projects/progress");
       
       if (!response.ok) {
         throw new Error("Failed to fetch projects");
@@ -31,11 +55,16 @@ export default function ProjectList({ onProjectCreated }: ProjectListProps) {
       
       const data = await response.json();
       setProjects(data.projects);
+      setStats(data.stats);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleResume = (projectId: string, stepId: number) => {
+    router.push(`/projects/${projectId}?step=${stepId}`);
   };
 
   useEffect(() => {
@@ -85,43 +114,39 @@ export default function ProjectList({ onProjectCreated }: ProjectListProps) {
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project) => (
-        <Link
-          key={project.id}
-          href={`/projects/${project.id}`}
-          className="block group"
-        >
-          <div className="bg-slate-800/50 border border-slate-700 overflow-hidden shadow-sm rounded-lg hover:bg-slate-800/70 hover:border-purple-500/50 transition-all duration-200">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-white group-hover:text-purple-400">
-                {project.name}
-              </h3>
-              {project.description && (
-                <p className="mt-1 text-sm text-gray-300 line-clamp-2">
-                  {project.description}
-                </p>
-              )}
-              <div className="mt-4 flex items-center text-sm text-gray-400">
-                <svg
-                  className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Created {new Date(project.createdAt).toLocaleDateString()}
-              </div>
-            </div>
+    <div className="space-y-6">
+      {/* Project Stats */}
+      {stats && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <div className="text-2xl font-bold text-white">{stats.total}</div>
+            <div className="text-sm text-gray-300">Total Projects</div>
           </div>
-        </Link>
-      ))}
+          <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <div className="text-2xl font-bold text-green-400">{stats.completed}</div>
+            <div className="text-sm text-gray-300">Completed</div>
+          </div>
+          <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <div className="text-2xl font-bold text-blue-400">{stats.inProgress}</div>
+            <div className="text-sm text-gray-300">In Progress</div>
+          </div>
+          <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <div className="text-2xl font-bold text-purple-400">{stats.completionRate}%</div>
+            <div className="text-sm text-gray-300">Completion Rate</div>
+          </div>
+        </div>
+      )}
+
+      {/* Project Grid */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <ProjectProgressCard
+            key={project.projectId}
+            project={project}
+            onResume={handleResume}
+          />
+        ))}
+      </div>
     </div>
   );
 }

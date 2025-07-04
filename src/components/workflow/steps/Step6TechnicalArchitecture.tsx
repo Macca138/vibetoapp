@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
+// import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Loader2, Cpu, Database, Shield, Zap, Server, Globe, Code, Gauge } from 'lucide-react';
 
@@ -363,12 +363,14 @@ export default function Step6TechnicalArchitecture({
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {platformOptions.map(platform => (
                 <div key={platform.id} className="flex items-center space-x-2">
-                  <Checkbox
+                  <input
+                    type="checkbox"
                     id={platform.id}
                     checked={formData.platformChoice.includes(platform.id)}
-                    onCheckedChange={(checked) => 
-                      handlePlatformChange(platform.id, checked as boolean)
+                    onChange={(e) => 
+                      handlePlatformChange(platform.id, e.target.checked)
                     }
+                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                   />
                   <Label htmlFor={platform.id} className="text-sm font-normal">
                     {platform.label}

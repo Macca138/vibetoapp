@@ -71,6 +71,21 @@ export const queues = {
   notifications: notificationQueue,
 };
 
+// Setup export processor
+import { processExportJob } from './processors/export.processor';
+
+dataExportQueue.process('export-project', async (job) => {
+  console.log(`Processing export job ${job.id} for project ${job.data.projectId}`);
+  
+  // Update job progress
+  job.progress(5);
+  
+  const result = await processExportJob(job);
+  
+  job.progress(100);
+  return result;
+});
+
 // Graceful shutdown
 export const closeQueues = async () => {
   await Promise.all([

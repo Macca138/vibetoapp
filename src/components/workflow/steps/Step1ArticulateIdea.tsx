@@ -7,6 +7,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Loader2, Lightbulb, Target } from 'lucide-react';
+import { useAutoSave } from '@/hooks/useAutoSave';
+import AutoSaveIndicator from '../AutoSaveIndicator';
 
 interface Step1Data {
   appIdea: string;
@@ -52,6 +54,23 @@ export default function Step1ArticulateIdea({
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Auto-save functionality
+  const autoSave = useAutoSave(formData, {
+    onSave: async (data) => {
+      await fetch(`/api/projects/${projectId}/save`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stepId: 1,
+          responses: data,
+          completed: false,
+        }),
+      });
+    },
+    delay: 3000,
+    enabled: !!(formData.appIdea || formData.inspiration || formData.problemSolving),
+  });
 
   const handleInputChange = (field: keyof Step1Data, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -315,6 +334,15 @@ export default function Step1ArticulateIdea({
           </div>
         </motion.div>
       )}
+
+      {/* Auto-save indicator */}
+      <div className="fixed bottom-4 right-4 bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-lg">
+        <AutoSaveIndicator
+          status={autoSave.status}
+          error={autoSave.error}
+          lastSaved={autoSave.lastSaved}
+        />
+      </div>
     </div>
   );
 }

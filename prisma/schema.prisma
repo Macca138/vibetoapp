@@ -26,6 +26,10 @@ model User {
   projects      Project[]
   accounts      Account[]
   sessions      Session[]
+  subscriptions UserSubscription[]
+  payments      PaymentRecord[]
+  exportJobs    ExportJob[]
+  emailLogs     EmailLog[]
 }
 
 model Account {
@@ -73,6 +77,9 @@ model Project {
   updatedAt   DateTime @updatedAt
   
   workflow    ProjectWorkflow?
+  dataFlowRelationships DataFlowRelationship[]
+  payments    PaymentRecord[]
+  exportJobs  ExportJob[]
   
   @@index([userId])
 }
@@ -116,5 +123,119 @@ model Waitlist {
   createdAt DateTime @default(now())
   
   @@index([email])
+  @@index([createdAt])
+}
+
+model DataFlowRelationship {
+  id              String   @id @default(cuid())
+  projectId       String
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sourceStepId    Int
+  targetStepId    Int
+  sourceField     String   // Field name in source step
+  targetField     String   // Field name in target step
+  transformType   String?  // Optional: 'copy', 'aggregate', 'transform'
+  transformConfig Json?    // Optional: Configuration for transformations
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([projectId, sourceStepId, sourceField, targetStepId, targetField])
+  @@index([projectId])
+  @@index([sourceStepId, targetStepId])
+}
+
+model UserSubscription {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeCustomerId  String?  @unique
+  stripeSubscriptionId String? @unique
+  stripePriceId     String?
+  status            String   // active, canceled, incomplete, past_due, etc.
+  type              String   // project, subscription
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  cancelAtPeriodEnd Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([stripeCustomerId])
+  @@index([status])
+}
+
+model PaymentRecord {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId         String?
+  project           Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  stripePaymentId   String   @unique
+  stripeSessionId   String?  @unique
+  amount            Int      // Amount in cents
+  currency          String   @default("usd")
+  status            String   // succeeded, pending, failed
+  type              String   // project_unlock, subscription, one_time
+  metadata          Json?    // Additional payment metadata
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([projectId])
+  @@index([status])
+  @@index([type])
+}
+
+model ExportJob {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  format        String   // pdf, markdown
+  status        String   // pending, processing, completed, failed
+  filename      String?  // Generated filename
+  fileUrl       String?  // URL to download the exported file
+  fileSize      Int?     // File size in bytes
+  errorMessage  String?  // Error message if failed
+  jobId         String?  // Bull queue job ID
+  startedAt     DateTime?
+  completedAt   DateTime?
+  expiresAt     DateTime? // When the file expires and gets deleted
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  emailLogs     EmailLog[]
+  
+  @@index([userId])
+  @@index([projectId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model EmailLog {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exportJobId   String?
+  exportJob     ExportJob? @relation(fields: [exportJobId], references: [id], onDelete: SetNull)
+  recipientEmail String
+  emailType     String   // export-completed, export-failed, welcome, etc.
+  subject       String
+  status        String   // pending, sent, failed, bounced
+  resendId      String?  // ID from Resend service
+  errorMessage  String?  // Error message if failed
+  sentAt        DateTime?
+  deliveredAt   DateTime?
+  openedAt      DateTime?
+  clickedAt     DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([exportJobId])
+  @@index([status])
+  @@index([emailType])
   @@index([createdAt])
 }

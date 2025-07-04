@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { DataFlowEngine } from '@/lib/dataFlowEngine';
 
 interface RouteParams {
   params: Promise<{ id: string; stepId: string }>;
@@ -78,6 +79,19 @@ export async function PUT(request: Request, { params }: RouteParams) {
           updatedAt: new Date(),
         },
       });
+
+      // Process data flow to the next step
+      const nextStepId = stepId + 1;
+      const mappings = await DataFlowEngine.processDataFlow({
+        projectId,
+        sourceStepId: stepId,
+        targetStepId: nextStepId,
+      });
+
+      // Apply mappings to the next step
+      if (mappings.length > 0) {
+        await DataFlowEngine.applyMappingsToStep(projectId, nextStepId, mappings);
+      }
     }
 
     // Check if workflow is completed (all 9 steps completed)

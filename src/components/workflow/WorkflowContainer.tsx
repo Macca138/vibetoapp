@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { m } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
 import { getWorkflowStep } from '@/lib/workflow/config';
@@ -43,6 +44,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [workflow, setWorkflow] = useState<ProjectWorkflowType | null>(null);
+  const searchParams = useSearchParams();
 
   // Initialize workflow data
   useEffect(() => {
@@ -62,12 +64,24 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
         })),
       };
       setWorkflow(workflowData);
-      setCurrentStep(project.workflow.currentStep);
+      
+      // Check for step parameter in URL
+      const stepParam = searchParams.get('step');
+      if (stepParam) {
+        const stepNumber = parseInt(stepParam);
+        if (stepNumber >= 1 && stepNumber <= 9) {
+          setCurrentStep(stepNumber);
+        } else {
+          setCurrentStep(project.workflow.currentStep);
+        }
+      } else {
+        setCurrentStep(project.workflow.currentStep);
+      }
     } else {
       // Initialize new workflow
       initializeWorkflow();
     }
-  }, [project]);
+  }, [project, searchParams]);
 
   const initializeWorkflow = async () => {
     try {
@@ -132,15 +146,41 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
     }
   };
 
-  const handleStepNavigation = (stepId: number) => {
+  const handleStepNavigation = async (stepId: number) => {
     if (workflow && stepId >= 1 && stepId <= 9) {
+      // Check if we need to process data flow when navigating to a new step
+      const targetStepResponse = workflow.responses.find(r => r.stepId === stepId);
+      
+      // If the target step has no data and there's a previous step with data, process data flow
+      if (!targetStepResponse || Object.keys(targetStepResponse.responses).length === 0) {
+        // Find the most recent completed step before the target
+        const previousSteps = workflow.responses
+          .filter(r => r.stepId < stepId && r.completed)
+          .sort((a, b) => b.stepId - a.stepId);
+        
+        if (previousSteps.length > 0) {
+          const sourceStepId = previousSteps[0].stepId;
+          
+          // Process data flow in the background
+          fetch('/api/dataflow', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              projectId: project.id,
+              sourceStepId,
+              targetStepId: stepId,
+            }),
+          }).catch(console.error);
+        }
+      }
+      
       setCurrentStep(stepId);
     }
   };
 
   const handleNext = () => {
     if (currentStep < 9) {
-      setCurrentStep(currentStep + 1);
+      handleStepNavigation(currentStep + 1);
     }
   };
 

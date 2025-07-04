@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import ProjectList from "@/components/projects/ProjectList";
 import CreateProjectForm from "@/components/projects/CreateProjectForm";
 
@@ -45,6 +46,16 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex items-center space-x-4">
+              <Link
+                href="/pricing"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-purple-400 bg-slate-800/50 border border-purple-500/50 hover:bg-slate-800/70 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+              >
+                <svg className="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Upgrade
+              </Link>
+              
               <button
                 onClick={() => setShowCreateForm(true)}
                 className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"

@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { m } from 'framer-motion';
 import { WorkflowStep as WorkflowStepType, WorkflowResponse } from '@/lib/workflow/types';
 import { fadeInUp, containerVariants } from '@/lib/animations';
+import { useAutoSave } from '@/hooks/useAutoSave';
 import WorkflowField from './WorkflowField';
+import AutoSaveIndicator from './AutoSaveIndicator';
 import AnimatedButton from '@/components/animations/AnimatedButton';
 import Step1ArticulateIdea from './steps/Step1ArticulateIdea';
 import Step2FleshingOut from './steps/Step2FleshingOut';
@@ -39,6 +41,23 @@ export default function WorkflowStep({
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSaving, setIsSaving] = useState(false);
+
+  // Auto-save functionality
+  const autoSave = useAutoSave(formData, {
+    onSave: async (data) => {
+      await fetch(`/api/projects/${projectId}/save`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          stepId: step.id,
+          responses: data,
+          completed: false, // Auto-save doesn't mark as complete
+        }),
+      });
+    },
+    delay: 3000, // 3 second delay
+    enabled: Object.keys(formData).length > 0, // Only enable if form has data
+  });
 
   // Initialize form data from existing response
   useEffect(() => {
@@ -126,16 +145,6 @@ export default function WorkflowStep({
     }
   };
 
-  // Auto-save every 30 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (Object.keys(formData).length > 0) {
-        handleSave(false);
-      }
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [formData]);
 
   // Use custom step components
   if (step.id === 1) {
@@ -305,16 +314,16 @@ export default function WorkflowStep({
       </m.div>
 
       {/* Auto-save indicator */}
-      {isSaving && (
-        <m.div
-          className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-        >
-          Saving...
-        </m.div>
-      )}
+      <m.div
+        className="fixed bottom-4 right-4 bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-lg"
+        variants={fadeInUp}
+      >
+        <AutoSaveIndicator
+          status={autoSave.status}
+          error={autoSave.error}
+          lastSaved={autoSave.lastSaved}
+        />
+      </m.div>
     </m.div>
   );
 }
