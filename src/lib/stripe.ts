@@ -10,53 +10,8 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   typescript: true,
 });
 
-// Pricing configuration
-export const PRICING_PLANS = {
-  PROJECT_UNLOCK: {
-    name: 'Project Unlock',
-    description: 'Unlock a single project with full AI-powered workflow',
-    price: 997, // $9.97 in cents
-    currency: 'usd',
-    type: 'one_time' as const,
-    features: [
-      'Complete 9-step AI workflow',
-      'Detailed project specifications',
-      'Export to multiple formats',
-      'Lifetime access to project',
-    ],
-  },
-  MONTHLY_SUBSCRIPTION: {
-    name: 'Monthly Subscription',
-    description: 'Unlimited projects with monthly billing',
-    price: 2997, // $29.97 in cents
-    currency: 'usd',
-    type: 'subscription' as const,
-    interval: 'month' as const,
-    features: [
-      'Unlimited projects',
-      'All AI workflow features',
-      'Priority support',
-      'Export to all formats',
-      'Advanced analytics',
-    ],
-  },
-  YEARLY_SUBSCRIPTION: {
-    name: 'Yearly Subscription',
-    description: 'Unlimited projects with yearly billing (2 months free)',
-    price: 29970, // $299.70 in cents (normally $359.64)
-    currency: 'usd',
-    type: 'subscription' as const,
-    interval: 'year' as const,
-    features: [
-      'Unlimited projects',
-      'All AI workflow features',
-      'Priority support',
-      'Export to all formats',
-      'Advanced analytics',
-      '2 months free',
-    ],
-  },
-} as const;
+// Import pricing configuration from client-safe file
+export { PRICING_PLANS } from './pricing';
 
 // Helper function to create a Stripe Customer
 export async function createStripeCustomer(
@@ -190,16 +145,7 @@ export function verifyWebhookSignature(
   return stripe.webhooks.constructEvent(body, signature, endpointSecret);
 }
 
-// Helper function to format currency
-export function formatCurrency(
-  amount: number,
-  currency: string = 'usd'
-): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency.toUpperCase(),
-    minimumFractionDigits: 2,
-  }).format(amount / 100);
-}
+// Export formatCurrency from client-safe file
+export { formatCurrency } from './pricing';
 
 export default stripe;

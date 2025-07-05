@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { m } from 'framer-motion';
 import { Check, Star, Zap, Crown, ArrowRight, Loader2 } from 'lucide-react';
-import { PRICING_PLANS, formatCurrency } from '@/lib/stripe';
+import { PRICING_PLANS, formatCurrency } from '@/lib/pricing';
 
 interface PricingCardProps {
   plan: keyof typeof PRICING_PLANS;

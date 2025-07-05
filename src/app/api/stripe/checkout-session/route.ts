@@ -6,9 +6,9 @@ import {
   stripe, 
   createStripeCustomer, 
   createCheckoutSession, 
-  createProjectUnlockPrice,
-  PRICING_PLANS 
+  createProjectUnlockPrice
 } from '@/lib/stripe';
+import { PRICING_PLANS } from '@/lib/pricing';
 import { z } from 'zod';
 
 const checkoutSessionSchema = z.object({

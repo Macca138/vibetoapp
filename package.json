@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "worker": "tsx src/workers/queue-worker.ts",
+    "dev:all": "concurrently \"npm run dev\" \"npm run worker\"",
+    "redis": "redis-server"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -41,10 +44,12 @@
     "@types/puppeteer": "^5.4.7",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "prisma": "^6.10.1",
     "tailwindcss": "^4",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }
