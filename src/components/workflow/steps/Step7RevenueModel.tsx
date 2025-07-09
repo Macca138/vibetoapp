@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -160,7 +160,7 @@ export default function Step7RevenueModel({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -175,11 +175,11 @@ export default function Step7RevenueModel({
             Explore monetization strategies tailored to your app and target market. 
             Let's determine how your app will generate sustainable revenue.
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -209,9 +209,9 @@ export default function Step7RevenueModel({
               ))}
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -239,10 +239,10 @@ export default function Step7RevenueModel({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -271,9 +271,9 @@ export default function Step7RevenueModel({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -301,10 +301,10 @@ export default function Step7RevenueModel({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
       {canProceed && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -339,11 +339,11 @@ export default function Step7RevenueModel({
               </Button>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       )}
 
       {showAnalysis && aiAnalysis && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -419,7 +419,7 @@ export default function Step7RevenueModel({
               </CardContent>
             </Card>
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       <div className="flex justify-between items-center pt-8">

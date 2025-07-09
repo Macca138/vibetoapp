@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -159,7 +159,7 @@ export default function Step8MVPDefinition({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -174,10 +174,10 @@ export default function Step8MVPDefinition({
             Define your minimum viable product with clear milestones and priorities. 
             Let's create a roadmap that gets you to market quickly and efficiently.
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -206,9 +206,9 @@ export default function Step8MVPDefinition({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -237,10 +237,10 @@ export default function Step8MVPDefinition({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -268,9 +268,9 @@ export default function Step8MVPDefinition({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -298,10 +298,10 @@ export default function Step8MVPDefinition({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -329,10 +329,10 @@ export default function Step8MVPDefinition({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
       {canProceed && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
@@ -367,11 +367,11 @@ export default function Step8MVPDefinition({
               </Button>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       )}
 
       {showAnalysis && aiAnalysis && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -513,7 +513,7 @@ export default function Step8MVPDefinition({
               </CardContent>
             </Card>
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       <div className="flex justify-between items-center pt-8">

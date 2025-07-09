@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -177,7 +177,7 @@ export default function Step9ExportExecute({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -192,11 +192,11 @@ export default function Step9ExportExecute({
             Congratulations! Let's package everything into actionable documentation 
             and prepare you for the next phase of your app development journey.
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
       {showCongratulations && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -228,10 +228,10 @@ export default function Step9ExportExecute({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       )}
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -283,10 +283,10 @@ export default function Step9ExportExecute({
             )}
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
       {(exportStatus.completed.length > 0 || exportStatus.failed.length > 0) && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -329,11 +329,11 @@ export default function Step9ExportExecute({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       )}
 
       <div className="grid md:grid-cols-2 gap-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -366,9 +366,9 @@ export default function Step9ExportExecute({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -398,10 +398,10 @@ export default function Step9ExportExecute({
               ))}
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -429,10 +429,10 @@ export default function Step9ExportExecute({
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </m.div>
 
       {formData.nextSteps && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -520,7 +520,7 @@ export default function Step9ExportExecute({
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       )}
 
       <div className="flex justify-between items-center pt-8">

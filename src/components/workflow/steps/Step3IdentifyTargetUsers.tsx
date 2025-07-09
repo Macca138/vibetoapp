@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -278,7 +278,7 @@ export default function Step3IdentifyTargetUsers({
 
       {/* AI Analysis Results */}
       {aiAnalysis && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -498,7 +498,7 @@ export default function Step3IdentifyTargetUsers({
               Continue to Step 4: Feature Discovery
             </Button>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </div>
   );
