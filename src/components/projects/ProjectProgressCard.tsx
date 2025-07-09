@@ -61,9 +61,10 @@ export default function ProjectProgressCard({
     return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
   };
 
-  const formatLastActivity = (date: Date) => {
+  const formatLastActivity = (date: Date | string) => {
     const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+    const diffInHours = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60 * 60));
     
     if (diffInHours < 1) return 'Less than an hour ago';
     if (diffInHours < 24) return `${diffInHours} hours ago`;

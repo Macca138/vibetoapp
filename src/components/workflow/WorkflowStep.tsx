@@ -279,11 +279,11 @@ export default function WorkflowStep({
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           {step.title}
         </h1>
-        <p className="text-lg text-gray-600 mb-4">
+        <p className="text-lg text-gray-800 mb-4">
           {step.description}
         </p>
         <div className="max-w-2xl mx-auto">
-          <p className="text-base text-gray-800 bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+          <p className="text-base text-gray-900 bg-indigo-100 rounded-lg p-4 border border-indigo-200">
             {step.prompt}
           </p>
         </div>

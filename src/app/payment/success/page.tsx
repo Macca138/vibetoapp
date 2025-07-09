@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { m } from 'framer-motion';
+// import { m } from 'framer-motion';
 import { CheckCircle, ArrowRight, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -75,21 +75,18 @@ export default function PaymentSuccessPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-4">
-      <m.div
+      <div
         className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center"
-        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
       >
         {/* Success Icon */}
-        <m.div
+        <div
           className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         >
           <CheckCircle className="w-8 h-8 text-green-600" />
-        </m.div>
+        </div>
 
         {/* Success Message */}
         <m.h1
@@ -112,7 +109,7 @@ export default function PaymentSuccessPage() {
 
         {/* User Info */}
         {session?.user && (
-          <m.div
+          <div
             className="bg-gray-50 rounded-lg p-4 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,12 +121,12 @@ export default function PaymentSuccessPage() {
             <p className="font-semibold text-gray-900">
               {session.user.name || session.user.email}
             </p>
-          </m.div>
+          </div>
         )}
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          <m.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -141,9 +138,9 @@ export default function PaymentSuccessPage() {
               {nextAction}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
-          </m.div>
+          </div>
 
-          <m.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
@@ -154,11 +151,11 @@ export default function PaymentSuccessPage() {
             >
               View Pricing Plans
             </Link>
-          </m.div>
+          </div>
         </div>
 
         {/* Additional Info */}
-        <m.div
+        <div
           className="mt-8 pt-6 border-t border-gray-200"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -169,7 +166,7 @@ export default function PaymentSuccessPage() {
             please contact our support team.
           </p>
         </div>
-      </m.div>
+      </div>
     </div>
   );
 }

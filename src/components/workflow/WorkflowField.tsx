@@ -54,7 +54,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
             maxLength={field.maxLength}
             minLength={field.minLength}
             rows={4}
-            className={`block w-full rounded-md border-gray-400 px-4 py-3 text-base text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 resize-vertical shadow-sm ${
+            className={`block w-full rounded-md border-gray-300 bg-white px-4 py-3 text-base text-gray-900 placeholder-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 resize-vertical shadow-sm ${
               error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
             }`}
             whileFocus={{
@@ -71,7 +71,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
             value={value as string}
             onChange={handleChange}
             required={field.required}
-            className={`block w-full rounded-md border-gray-300 px-4 py-3 text-base text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
+            className={`block w-full rounded-md border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 shadow-sm ${
               error ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
             }`}
             whileFocus={{
@@ -94,7 +94,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
             {field.options?.map((option) => (
               <m.label
                 key={option}
-                className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
+                className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-100 transition-colors duration-200"
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
@@ -123,7 +123,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
             {field.options?.map((option) => (
               <m.label
                 key={option}
-                className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-50 transition-colors duration-200"
+                className="flex items-center space-x-2 cursor-pointer p-2 rounded-md hover:bg-gray-100 transition-colors duration-200"
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
@@ -154,7 +154,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
               onChange={handleChange}
               className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             />
-            <span className="text-sm text-gray-700">{field.label}</span>
+            <span className="text-sm text-gray-900">{field.label}</span>
           </m.label>
         );
 
@@ -184,7 +184,7 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
       transition={{ duration: 0.3 }}
     >
       {field.type !== 'checkbox' && (
-        <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
+        <label htmlFor={field.id} className="block text-sm font-medium text-gray-900">
           {field.label}
           {field.required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -193,11 +193,11 @@ export default function WorkflowField({ field, value, onChange, error }: Workflo
       {renderField()}
       
       {field.helpText && (
-        <p className="text-xs text-gray-500">{field.helpText}</p>
+        <p className="text-xs text-gray-700">{field.helpText}</p>
       )}
       
       {field.maxLength && field.type === 'textarea' && (
-        <p className="text-xs text-gray-400 text-right">
+        <p className="text-xs text-gray-600 text-right">
           {(value as string)?.length || 0} / {field.maxLength}
         </p>
       )}

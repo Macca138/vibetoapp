@@ -36,23 +36,23 @@ export default function StepNavigation({
                 disabled={!isClickable}
                 className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
                   status === 'current'
-                    ? 'bg-indigo-50 border-2 border-indigo-500 shadow-sm'
+                    ? 'bg-indigo-100 border-2 border-indigo-500 shadow-md'
                     : status === 'completed'
-                    ? 'bg-green-50 border border-green-200 hover:bg-green-100'
+                    ? 'bg-green-100 border border-green-300 hover:bg-green-150'
                     : status === 'available'
-                    ? 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
-                    : 'bg-gray-100 border border-gray-200 opacity-50 cursor-not-allowed'
+                    ? 'bg-white border-2 border-gray-300 hover:bg-gray-50 shadow-sm'
+                    : 'bg-gray-50 border border-gray-300 opacity-60 cursor-not-allowed'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     status === 'current'
-                      ? 'bg-indigo-500 text-white'
+                      ? 'bg-indigo-600 text-white'
                       : status === 'completed'
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-green-600 text-white'
                       : status === 'available'
-                      ? 'bg-gray-300 text-gray-700'
-                      : 'bg-gray-200 text-gray-400'
+                      ? 'bg-gray-600 text-white'
+                      : 'bg-gray-400 text-gray-100'
                   }`}>
                     {status === 'completed' ? (
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -71,18 +71,18 @@ export default function StepNavigation({
                         ? 'text-green-900'
                         : status === 'available'
                         ? 'text-gray-900'
-                        : 'text-gray-400'
+                        : 'text-gray-600'
                     }`}>
                       {step.title}
                     </p>
                     <p className={`text-xs ${
                       status === 'current'
-                        ? 'text-indigo-600'
+                        ? 'text-indigo-700'
                         : status === 'completed'
-                        ? 'text-green-600'
+                        ? 'text-green-700'
                         : status === 'available'
-                        ? 'text-gray-500'
-                        : 'text-gray-400'
+                        ? 'text-gray-700'
+                        : 'text-gray-500'
                     }`}>
                       {step.description}
                     </p>

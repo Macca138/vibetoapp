@@ -211,7 +211,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <m.div 
         className="bg-white shadow-sm border-b"
@@ -263,7 +263,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <div className="bg-white shadow-sm rounded-lg p-6 lg:p-8">
+            <div className="bg-white shadow-md rounded-lg border border-gray-200 p-6 lg:p-8">
               <WorkflowStep
                 step={currentStepData}
                 projectId={project.id}

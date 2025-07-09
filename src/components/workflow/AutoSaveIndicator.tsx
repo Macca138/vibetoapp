@@ -46,13 +46,13 @@ export default function AutoSaveIndicator({
   const getStatusColor = () => {
     switch (status) {
       case 'saving':
-        return 'text-gray-500';
+        return 'text-blue-600';
       case 'saved':
         return 'text-green-600';
       case 'error':
         return 'text-red-600';
       default:
-        return 'text-gray-400';
+        return 'text-gray-700';
     }
   };
 

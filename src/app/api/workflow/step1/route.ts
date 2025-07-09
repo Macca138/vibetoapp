@@ -93,22 +93,42 @@ export async function POST(request: NextRequest) {
       status: 'completed' as const
     };
 
-    await prisma.workflowStep.upsert({
+    // First, ensure ProjectWorkflow exists
+    const projectWorkflow = await prisma.projectWorkflow.upsert({
       where: {
-        projectId_stepNumber: {
-          projectId: validatedData.projectId,
-          stepNumber: 1
-        }
+        projectId: validatedData.projectId
       },
       update: {
-        data: workflowData,
+        currentStep: Math.max(1, 1), // Keep current step at least at 1
         updatedAt: new Date()
       },
       create: {
         projectId: validatedData.projectId,
-        stepNumber: 1,
-        data: workflowData,
-        status: 'completed'
+        currentStep: 1,
+        startedAt: new Date()
+      }
+    });
+
+    // Then upsert the WorkflowResponse
+    await prisma.workflowResponse.upsert({
+      where: {
+        workflowId_stepId: {
+          workflowId: projectWorkflow.id,
+          stepId: 1
+        }
+      },
+      update: {
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis),
+        updatedAt: new Date()
+      },
+      create: {
+        workflowId: projectWorkflow.id,
+        stepId: 1,
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis)
       }
     });
 

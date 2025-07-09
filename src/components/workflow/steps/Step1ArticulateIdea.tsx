@@ -123,7 +123,7 @@ export default function Step1ArticulateIdea({
       {/* Step Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900">Describe Your App Idea</h1>
-        <p className="text-lg text-gray-600 mt-2">
+        <p className="text-lg text-gray-800 mt-2">
           Start with your vision - no matter how rough or incomplete it might be
         </p>
       </div>
@@ -141,10 +141,10 @@ export default function Step1ArticulateIdea({
         </CardHeader>
         <CardContent className="space-y-6">
           <div>
-            <Label htmlFor="appIdea" className="text-base font-medium">
+            <Label htmlFor="appIdea" className="text-base font-medium text-gray-900">
               Describe your app idea *
             </Label>
-            <p className="text-sm text-gray-500 mb-2">
+            <p className="text-sm text-gray-700 mb-2">
               Don&apos;t worry about being perfect - just describe what you have in mind!
             </p>
             <Textarea
@@ -155,16 +155,16 @@ export default function Step1ArticulateIdea({
               className="min-h-[120px] resize-none"
               maxLength={1000}
             />
-            <div className="text-sm text-gray-400 mt-1">
+            <div className="text-sm text-gray-600 mt-1">
               {formData.appIdea.length}/1000 characters (minimum 50)
             </div>
           </div>
 
           <div>
-            <Label htmlFor="inspiration" className="text-base font-medium">
+            <Label htmlFor="inspiration" className="text-base font-medium text-gray-900">
               What inspired this idea?
             </Label>
-            <p className="text-sm text-gray-500 mb-2">
+            <p className="text-sm text-gray-700 mb-2">
               Share the story behind your idea
             </p>
             <Textarea
@@ -175,16 +175,16 @@ export default function Step1ArticulateIdea({
               className="min-h-[80px] resize-none"
               maxLength={500}
             />
-            <div className="text-sm text-gray-400 mt-1">
+            <div className="text-sm text-gray-600 mt-1">
               {formData.inspiration.length}/500 characters
             </div>
           </div>
 
           <div>
-            <Label htmlFor="problemSolving" className="text-base font-medium">
+            <Label htmlFor="problemSolving" className="text-base font-medium text-gray-900">
               What problem does it solve? *
             </Label>
-            <p className="text-sm text-gray-500 mb-2">
+            <p className="text-sm text-gray-700 mb-2">
               Focus on the main problem your app addresses
             </p>
             <Textarea
@@ -195,7 +195,7 @@ export default function Step1ArticulateIdea({
               className="min-h-[80px] resize-none"
               maxLength={500}
             />
-            <div className="text-sm text-gray-400 mt-1">
+            <div className="text-sm text-gray-600 mt-1">
               {formData.problemSolving.length}/500 characters
             </div>
           </div>
