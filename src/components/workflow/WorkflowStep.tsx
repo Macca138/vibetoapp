@@ -14,6 +14,9 @@ import Step3IdentifyTargetUsers from './steps/Step3IdentifyTargetUsers';
 import Step4FeatureDiscovery from './steps/Step4FeatureDiscovery';
 import Step5UserFlowMapping from './steps/Step5UserFlowMapping';
 import Step6TechnicalArchitecture from './steps/Step6TechnicalArchitecture';
+import Step7RevenueModel from './steps/Step7RevenueModel';
+import Step8MVPDefinition from './steps/Step8MVPDefinition';
+import Step9ExportExecute from './steps/Step9ExportExecute';
 
 interface WorkflowStepProps {
   step: WorkflowStepType;
@@ -215,6 +218,45 @@ export default function WorkflowStep({
   if (step.id === 6) {
     return (
       <Step6TechnicalArchitecture
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 7) {
+    return (
+      <Step7RevenueModel
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 8) {
+    return (
+      <Step8MVPDefinition
+        projectId={projectId}
+        initialData={response?.responses}
+        onComplete={async (data) => {
+          await onSave(data, true);
+        }}
+        onNext={onNext || (() => {})}
+      />
+    );
+  }
+
+  if (step.id === 9) {
+    return (
+      <Step9ExportExecute
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
