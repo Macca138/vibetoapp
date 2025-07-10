@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllQueueStats, getQueueHealth } from '@/lib/queues/monitor';
+import { getAllQueueStats, getQueueHealth } from '@/lib/queues/monitor-simple';
 
 export async function GET() {
   try {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { sendWaitlistWelcomeJob } from '@/lib/queues/processors/email.processor';
+// import { sendWaitlistWelcomeJob } from '@/lib/queues/processors/email.processor';
 
 const waitlistSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -46,13 +46,14 @@ export async function POST(request: Request) {
       },
     });
 
-    // Queue welcome email
+    // Queue welcome email (temporarily disabled for compatibility)
     try {
-      await sendWaitlistWelcomeJob({
-        to: entry.email,
-        name: entry.name || undefined,
-        position,
-      });
+      console.log('Would send welcome email to:', entry.email, 'Position:', position);
+      // await sendWaitlistWelcomeJob({
+      //   to: entry.email,
+      //   name: entry.name || undefined,
+      //   position,
+      // });
     } catch (emailError) {
       console.error('Failed to queue welcome email:', emailError);
       // Don't fail the request if email fails
