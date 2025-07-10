@@ -136,7 +136,7 @@ export function useProjectExport({
             onExportError?.(jobData.errorMessage || 'Export failed');
           } else if (jobData.status === 'expired') {
             toast.error('Export file has expired and is no longer available.');
-            onExportError?.'Export expired');
+            onExportError?.('Export expired');
           }
         }
 
