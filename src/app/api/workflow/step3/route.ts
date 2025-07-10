@@ -44,19 +44,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Get previous steps data for context
-    const [step1Data, step2Data] = await Promise.all([
-      prisma.workflowStep.findFirst({
-        where: { projectId: validatedData.projectId, stepNumber: 1 }
-      }),
-      prisma.workflowStep.findFirst({
-        where: { projectId: validatedData.projectId, stepNumber: 2 }
-      })
-    ]);
+    const projectWorkflow = await prisma.projectWorkflow.findFirst({
+      where: {
+        projectId: validatedData.projectId
+      },
+      include: {
+        responses: {
+          where: {
+            stepId: { in: [1, 2] }
+          }
+        }
+      }
+    });
 
     // Prepare context from previous steps
+    const step1Data = projectWorkflow?.responses.find(r => r.stepId === 1);
+    const step2Data = projectWorkflow?.responses.find(r => r.stepId === 2);
     const previousStepsData = {
-      step1: step1Data?.data || null,
-      step2: step2Data?.data || null
+      step1: step1Data?.responses || null,
+      step2: step2Data?.responses || null
     };
 
     // Generate AI response with previous steps context
@@ -181,22 +187,42 @@ export async function POST(request: NextRequest) {
       status: 'completed' as const
     };
 
-    await prisma.workflowStep.upsert({
+    // First, ensure ProjectWorkflow exists
+    const projectWorkflowRecord = await prisma.projectWorkflow.upsert({
       where: {
-        projectId_stepNumber: {
-          projectId: validatedData.projectId,
-          stepNumber: 3
-        }
+        projectId: validatedData.projectId
       },
       update: {
-        data: workflowData,
+        currentStep: Math.max(3, 3), // Keep current step at least at 3
         updatedAt: new Date()
       },
       create: {
         projectId: validatedData.projectId,
-        stepNumber: 3,
-        data: workflowData,
-        status: 'completed'
+        currentStep: 3,
+        startedAt: new Date()
+      }
+    });
+
+    // Then upsert the WorkflowResponse
+    await prisma.workflowResponse.upsert({
+      where: {
+        workflowId_stepId: {
+          workflowId: projectWorkflowRecord.id,
+          stepId: 3
+        }
+      },
+      update: {
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis),
+        updatedAt: new Date()
+      },
+      create: {
+        workflowId: projectWorkflowRecord.id,
+        stepId: 3,
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis)
       }
     });
 

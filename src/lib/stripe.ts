@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { PRICING_PLANS } from './pricing';
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('STRIPE_SECRET_KEY is required');

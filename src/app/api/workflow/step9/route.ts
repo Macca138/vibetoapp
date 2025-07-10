@@ -71,7 +71,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate AI response
+    // Get previous steps data for context
+    const projectWorkflow = await prisma.projectWorkflow.findFirst({
+      where: { projectId: validatedData.projectId },
+      include: {
+        responses: {
+          where: { stepId: { in: [1, 2, 3, 4, 5, 6, 7, 8] } }
+        }
+      }
+    });
+
+    const step1Data = projectWorkflow?.responses.find(r => r.stepId === 1);
+    const step2Data = projectWorkflow?.responses.find(r => r.stepId === 2);
+    const step3Data = projectWorkflow?.responses.find(r => r.stepId === 3);
+    const step4Data = projectWorkflow?.responses.find(r => r.stepId === 4);
+    const step5Data = projectWorkflow?.responses.find(r => r.stepId === 5);
+    const step6Data = projectWorkflow?.responses.find(r => r.stepId === 6);
+    const step7Data = projectWorkflow?.responses.find(r => r.stepId === 7);
+    const step8Data = projectWorkflow?.responses.find(r => r.stepId === 8);
+
+    // Prepare context from previous steps
+    const previousStepsData = {
+      step1: step1Data?.responses || null,
+      step2: step2Data?.responses || null,
+      step3: step3Data?.responses || null,
+      step4: step4Data?.responses || null,
+      step5: step5Data?.responses || null,
+      step6: step6Data?.responses || null,
+      step7: step7Data?.responses || null,
+      step8: step8Data?.responses || null
+    };
+
+    // Generate AI response with previous steps context
     const aiResponse = await generateWorkflowResponse({
       stepNumber: 9,
       userInput: {
@@ -82,6 +113,7 @@ export async function POST(request: NextRequest) {
         budget: validatedData.budget,
         preferredApproach: validatedData.preferredApproach
       },
+      previousStepsData,
       systemPrompt: STEP9_SYSTEM_PROMPT
     });
 
@@ -150,7 +182,7 @@ export async function POST(request: NextRequest) {
     };
 
     // First, ensure ProjectWorkflow exists
-    const projectWorkflow = await prisma.projectWorkflow.upsert({
+    const projectWorkflowRecord = await prisma.projectWorkflow.upsert({
       where: {
         projectId: validatedData.projectId
       },
@@ -173,7 +205,7 @@ export async function POST(request: NextRequest) {
     await prisma.workflowResponse.upsert({
       where: {
         workflowId_stepId: {
-          workflowId: projectWorkflow.id,
+          workflowId: projectWorkflowRecord.id,
           stepId: 9
         }
       },

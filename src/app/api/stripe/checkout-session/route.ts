@@ -180,21 +180,35 @@ export async function POST(req: NextRequest) {
     }
 
     // Store or update customer ID in our database
-    await prisma.userSubscription.upsert({
+    // First try to find existing subscription by stripeCustomerId
+    const userSubscription = await prisma.userSubscription.findFirst({
       where: {
         userId: session.user.id,
       },
-      update: {
-        stripeCustomerId: stripeCustomer.id,
-        updatedAt: new Date(),
-      },
-      create: {
-        userId: session.user.id,
-        stripeCustomerId: stripeCustomer.id,
-        status: 'incomplete',
-        type: type.includes('subscription') ? 'subscription' : 'project',
-      },
     });
+
+    if (userSubscription) {
+      // Update existing subscription
+      await prisma.userSubscription.update({
+        where: {
+          id: userSubscription.id,
+        },
+        data: {
+          stripeCustomerId: stripeCustomer.id,
+          updatedAt: new Date(),
+        },
+      });
+    } else {
+      // Create new subscription
+      await prisma.userSubscription.create({
+        data: {
+          userId: session.user.id,
+          stripeCustomerId: stripeCustomer.id,
+          status: 'incomplete',
+          type: type.includes('subscription') ? 'subscription' : 'project',
+        },
+      });
+    }
 
     // Create a payment record to track this checkout session
     await prisma.paymentRecord.create({

@@ -43,16 +43,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Get Step 1 data for context
-    const step1Data = await prisma.workflowStep.findFirst({
+    const projectWorkflow = await prisma.projectWorkflow.findFirst({
       where: {
-        projectId: validatedData.projectId,
-        stepNumber: 1
+        projectId: validatedData.projectId
+      },
+      include: {
+        responses: {
+          where: {
+            stepId: 1
+          }
+        }
       }
     });
 
     // Prepare context from previous steps
     const previousStepsData = {
-      step1: step1Data?.data || null
+      step1: projectWorkflow?.responses[0]?.responses || null
     };
 
     // Generate AI response with Step 1 context
@@ -135,22 +141,42 @@ export async function POST(request: NextRequest) {
       status: 'completed' as const
     };
 
-    await prisma.workflowStep.upsert({
+    // First, ensure ProjectWorkflow exists
+    const projectWorkflowRecord = await prisma.projectWorkflow.upsert({
       where: {
-        projectId_stepNumber: {
-          projectId: validatedData.projectId,
-          stepNumber: 2
-        }
+        projectId: validatedData.projectId
       },
       update: {
-        data: workflowData,
+        currentStep: Math.max(2, 2), // Keep current step at least at 2
         updatedAt: new Date()
       },
       create: {
         projectId: validatedData.projectId,
-        stepNumber: 2,
-        data: workflowData,
-        status: 'completed'
+        currentStep: 2,
+        startedAt: new Date()
+      }
+    });
+
+    // Then upsert the WorkflowResponse
+    await prisma.workflowResponse.upsert({
+      where: {
+        workflowId_stepId: {
+          workflowId: projectWorkflowRecord.id,
+          stepId: 2
+        }
+      },
+      update: {
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis),
+        updatedAt: new Date()
+      },
+      create: {
+        workflowId: projectWorkflowRecord.id,
+        stepId: 2,
+        responses: workflowData,
+        completed: true,
+        aiSuggestions: JSON.stringify(aiAnalysis)
       }
     });
 

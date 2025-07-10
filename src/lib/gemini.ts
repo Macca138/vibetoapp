@@ -1,15 +1,11 @@
-import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
+import https from 'https';
 
 if (!process.env.GEMINI_API_KEY) {
   throw new Error('GEMINI_API_KEY is not set in environment variables');
 }
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-// Initialize the Gemini 1.5 Flash model (higher quotas for development)
-const model: GenerativeModel = genAI.getGenerativeModel({ 
-  model: "gemini-1.5-flash" 
-});
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = "gemini-1.5-flash";
 
 export interface GeminiResponse {
   text: string;
@@ -25,6 +21,62 @@ export interface WorkflowPromptOptions {
   userInput: Record<string, any>;
   previousStepsData?: Record<string, any>;
   systemPrompt?: string;
+}
+
+/**
+ * Make direct API call to Gemini
+ */
+async function callGeminiAPI(prompt: string): Promise<string> {
+  const postData = JSON.stringify({
+    contents: [{
+      parts: [{
+        text: prompt
+      }]
+    }]
+  });
+
+  const options = {
+    hostname: 'generativelanguage.googleapis.com',
+    port: 443,
+    path: `/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData)
+    }
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        try {
+          const response = JSON.parse(data);
+          
+          if (res.statusCode === 200 && response.candidates) {
+            const text = response.candidates[0]?.content?.parts[0]?.text || '';
+            resolve(text);
+          } else {
+            reject(new Error(`Gemini API error: ${res.statusCode} - ${JSON.stringify(response)}`));
+          }
+        } catch (error) {
+          reject(new Error(`Failed to parse Gemini response: ${error instanceof Error ? error.message : 'Unknown error'}`));
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(new Error(`Gemini API request error: ${error.message}`));
+    });
+
+    req.write(postData);
+    req.end();
+  });
 }
 
 /**
@@ -52,9 +104,7 @@ export async function generateWorkflowResponse(
     prompt += `Current step user input:\n${JSON.stringify(userInput, null, 2)}\n\n`;
     prompt += `Please provide detailed, actionable feedback and suggestions to help refine and improve their app concept for this step.`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const text = await callGeminiAPI(prompt);
 
     return {
       text,
@@ -75,9 +125,7 @@ export async function generateWorkflowResponse(
  */
 export async function generateText(prompt: string): Promise<GeminiResponse> {
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const text = await callGeminiAPI(prompt);
 
     return {
       text,
@@ -109,5 +157,3 @@ export async function testGeminiConnection(): Promise<{ success: boolean; error?
     };
   }
 }
-
-export { model as geminiModel };
