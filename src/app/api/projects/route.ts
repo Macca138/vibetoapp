@@ -43,6 +43,12 @@ export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
+    console.log("Session data:", { 
+      userId: session?.user?.id, 
+      userEmail: session?.user?.email,
+      fullUser: session?.user 
+    });
+    
     if (!session?.user?.id) {
       return NextResponse.json(
         { error: "Unauthorized" },
@@ -62,6 +68,21 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, description } = validationResult.data;
+
+    // Check if user exists in database
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+    });
+    
+    console.log("User lookup result:", user);
+    
+    if (!user) {
+      console.error("User not found in database:", session.user.id);
+      return NextResponse.json(
+        { error: "User not found in database" },
+        { status: 400 }
+      );
+    }
 
     // Check if user already has a project with this name
     const existingProject = await prisma.project.findFirst({

@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-// import { sendWaitlistWelcomeJob } from '@/lib/queues/processors/email.processor';
 
 const waitlistSchema = z.object({
   email: z.string().email('Invalid email address'),

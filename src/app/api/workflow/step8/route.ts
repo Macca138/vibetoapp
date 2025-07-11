@@ -167,7 +167,7 @@ export async function POST(request: NextRequest) {
     };
 
     // First, ensure ProjectWorkflow exists
-    const projectWorkflow = await prisma.projectWorkflow.upsert({
+    const updatedProjectWorkflow = await prisma.projectWorkflow.upsert({
       where: {
         projectId: validatedData.projectId
       },
@@ -186,7 +186,7 @@ export async function POST(request: NextRequest) {
     await prisma.workflowResponse.upsert({
       where: {
         workflowId_stepId: {
-          workflowId: projectWorkflow.id,
+          workflowId: updatedProjectWorkflow.id,
           stepId: 8
         }
       },
@@ -197,7 +197,7 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date()
       },
       create: {
-        workflowId: projectWorkflow.id,
+        workflowId: updatedProjectWorkflow.id,
         stepId: 8,
         responses: workflowData,
         completed: true,

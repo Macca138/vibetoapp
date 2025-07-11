@@ -8,9 +8,9 @@ import { z } from 'zod';
 
 const Step1InputSchema = z.object({
   projectId: z.string(),
-  appIdea: z.string().min(50, 'App idea must be at least 50 characters').max(1000),
+  appIdea: z.string().min(50, 'App idea must be at least 50 characters').max(2000),
   inspiration: z.string().optional(),
-  problemSolving: z.string().min(10, 'Problem description must be at least 10 characters').max(500),
+  problemSolving: z.string().min(10, 'Problem description must be at least 10 characters').max(2000).optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -48,39 +48,60 @@ export async function POST(request: NextRequest) {
       userInput: {
         appIdea: validatedData.appIdea,
         inspiration: validatedData.inspiration,
-        problemSolving: validatedData.problemSolving
+        problemSolving: validatedData.problemSolving || validatedData.appIdea
       },
       systemPrompt: STEP1_SYSTEM_PROMPT
     });
 
-    // Parse AI response as JSON
+    // Parse AI response as JSON and transform to expected frontend structure
     let aiAnalysis;
     try {
-      aiAnalysis = JSON.parse(aiResponse.text);
-    } catch {
-      // If JSON parsing fails, create a structured fallback
+      const rawAiResponse = JSON.parse(aiResponse.text);
+      // Transform to expected frontend structure
       aiAnalysis = {
-        analysis: {
-          coreProblem: "Needs further clarification",
-          targetAudience: "To be defined",
-          uniqueValue: "Requires more detail",
-          marketOpportunity: "Needs validation"
+        projectOutline: {
+          problemStatement: rawAiResponse.analysis?.coreProblem || "Needs further clarification",
+          targetAudience: rawAiResponse.analysis?.targetAudience || "To be defined",
+          coreSolution: rawAiResponse.refinedConcept?.elevatorPitch || validatedData.appIdea,
+          uniqueValue: rawAiResponse.analysis?.uniqueValue || "Requires more detail",
+          keyFeatures: rawAiResponse.refinedConcept?.keyFeatures || ["Core functionality to be defined"],
+          successMetrics: rawAiResponse.analysis?.marketOpportunity || "Needs validation"
         },
-        refinedConcept: {
-          elevatorPitch: validatedData.appIdea,
-          keyFeatures: ["Core functionality to be defined"],
-          userBenefit: validatedData.problemSolving
+        refinedPrompt: {
+          system: "You are helping refine an app idea",
+          context: validatedData.appIdea,
+          instructions: "Focus on clarifying the core value proposition"
         },
-        recommendations: [
-          "Consider defining your unique value proposition more clearly",
-          "Think about your specific target audience",
-          "Research existing solutions in this space"
-        ],
-        followUpQuestions: [
+        clarificationQuestions: rawAiResponse.followUpQuestions || [
           "What makes your solution different from existing options?",
           "Who specifically would be your ideal user?",
           "What's the biggest pain point your app would solve?"
         ],
+        readyForNextStep: rawAiResponse.readyForNextStep || false,
+        rawAiResponse: aiResponse.text
+      };
+    } catch {
+      // If JSON parsing fails, create a structured fallback
+      aiAnalysis = {
+        projectOutline: {
+          problemStatement: "Needs further clarification",
+          targetAudience: "To be defined",
+          coreSolution: validatedData.appIdea,
+          uniqueValue: "Requires more detail",
+          keyFeatures: ["Core functionality to be defined"],
+          successMetrics: "Needs validation"
+        },
+        refinedPrompt: {
+          system: "You are helping refine an app idea",
+          context: validatedData.appIdea,
+          instructions: "Focus on clarifying the core value proposition"
+        },
+        clarificationQuestions: [
+          "What makes your solution different from existing options?",
+          "Who specifically would be your ideal user?",
+          "What's the biggest pain point your app would solve?"
+        ],
+        readyForNextStep: false,
         rawAiResponse: aiResponse.text
       };
     }

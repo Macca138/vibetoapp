@@ -28,6 +28,10 @@ export function canNavigateToStep(
   // Can always go to step 1
   if (targetStep === 1) return true;
   
+  // Can always go to any completed step
+  const targetStepResponse = workflow.responses.find(r => r.stepId === targetStep);
+  if (targetStepResponse?.completed) return true;
+  
   // Can't go to steps beyond the current allowed step
   if (targetStep > workflow.currentStep + 1) return false;
   

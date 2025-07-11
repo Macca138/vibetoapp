@@ -1,0 +1,69 @@
+{
+  "pages": {
+    "Landing Page": {
+      "endpoint": "/",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.570Z"
+    },
+    "Pricing": {
+      "endpoint": "/pricing",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.628Z"
+    },
+    "Payment Success": {
+      "endpoint": "/payment/success",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.679Z"
+    },
+    "Sign In": {
+      "endpoint": "/auth/signin",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.738Z"
+    },
+    "Sign Up": {
+      "endpoint": "/auth/signup",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.792Z"
+    },
+    "Auth Error": {
+      "endpoint": "/auth/error",
+      "status": 200,
+      "hasHTML": true,
+      "hasReact": true,
+      "hasCSS": true,
+      "hasJS": true,
+      "timestamp": "2025-07-11T11:36:24.842Z"
+    }
+  },
+  "components": {},
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "totalTests": 77,
+    "passed": 77,
+    "failed": 0,
+    "warnings": 0,
+    "duration": 826,
+    "timestamp": "2025-07-11T11:36:25.301Z"
+  }
+}

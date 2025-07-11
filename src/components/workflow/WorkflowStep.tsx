@@ -10,13 +10,13 @@ import AutoSaveIndicator from './AutoSaveIndicator';
 import AnimatedButton from '@/components/animations/AnimatedButton';
 import Step1ArticulateIdea from './steps/Step1ArticulateIdea';
 import Step2FleshingOut from './steps/Step2FleshingOut';
-import Step3IdentifyTargetUsers from './steps/Step3IdentifyTargetUsers';
-import Step4FeatureDiscovery from './steps/Step4FeatureDiscovery';
-import Step5UserFlowMapping from './steps/Step5UserFlowMapping';
-import Step6TechnicalArchitecture from './steps/Step6TechnicalArchitecture';
-import Step7RevenueModel from './steps/Step7RevenueModel';
-import Step8MVPDefinition from './steps/Step8MVPDefinition';
-import Step9ExportExecute from './steps/Step9ExportExecute';
+import Step3TechnicalArchitecture from './steps/Step3TechnicalArchitecture';
+import Step4FeatureStoriesUXFlows from './steps/Step4FeatureStoriesUXFlows';
+import Step5DesignSystemStyleGuide from './steps/Step5DesignSystemStyleGuide';
+import Step6ScreenStatesSpecification from './steps/Step6ScreenStatesSpecification';
+import Step7ComprehensiveTechnicalSpecification from './steps/Step7ComprehensiveTechnicalSpecification';
+import Step8DevelopmentRulesIntegration from './steps/Step8DevelopmentRulesIntegration';
+import Step9ImplementationPlanning from './steps/Step9ImplementationPlanning';
 
 interface WorkflowStepProps {
   step: WorkflowStepType;
@@ -159,6 +159,7 @@ export default function WorkflowStep({
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
@@ -172,97 +173,105 @@ export default function WorkflowStep({
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 3) {
     return (
-      <Step3IdentifyTargetUsers
+      <Step3TechnicalArchitecture
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 4) {
     return (
-      <Step4FeatureDiscovery
+      <Step4FeatureStoriesUXFlows
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 5) {
     return (
-      <Step5UserFlowMapping
+      <Step5DesignSystemStyleGuide
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 6) {
     return (
-      <Step6TechnicalArchitecture
+      <Step6ScreenStatesSpecification
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 7) {
     return (
-      <Step7RevenueModel
+      <Step7ComprehensiveTechnicalSpecification
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 8) {
     return (
-      <Step8MVPDefinition
+      <Step8DevelopmentRulesIntegration
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }
 
   if (step.id === 9) {
     return (
-      <Step9ExportExecute
+      <Step9ImplementationPlanning
         projectId={projectId}
         initialData={response?.responses}
         onComplete={async (data) => {
           await onSave(data, true);
         }}
         onNext={onNext || (() => {})}
+        onPrevious={onPrevious}
       />
     );
   }

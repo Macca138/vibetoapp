@@ -1,0 +1,427 @@
+
+> nextjs-temp@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.30
+  - Local:        http://localhost:3000
+  - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 3.1s
+ ○ Compiling / ...
+ ⨯ src/app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ ⨯ src/app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ ⨯ src/app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ GET / 500 in 39001ms
+ ✓ Compiled /_error in 4.1s (1697 modules)
+ ✓ Compiled in 1976ms (1679 modules)
+ ✓ Compiled in 2.3s (1679 modules)
+ GET / 200 in 933ms
+ GET / 200 in 161ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 4.5s (1017 modules)
+ GET /api/auth/providers 200 in 5009ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 783ms (1047 modules)
+ GET /favicon.ico 200 in 1059ms
+ ○ Compiling /api/waitlist ...
+ ✓ Compiled /api/waitlist in 886ms (1081 modules)
+Would send welcome email to: test@example.com Position: 1
+ POST /api/waitlist 200 in 1339ms
+ GET / 200 in 474ms
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 995ms (1979 modules)
+ GET /auth/signin 200 in 1352ms
+ ○ Compiling /auth/signup ...
+ ✓ Compiled /auth/signup in 1189ms (1986 modules)
+ GET /auth/signup 200 in 1464ms
+ ○ Compiling /auth/error ...
+ ✓ Compiled /auth/error in 952ms (1992 modules)
+ GET /auth/error 200 in 1159ms
+ ✓ Compiled /api/projects in 433ms (1098 modules)
+ GET /api/projects 401 in 604ms
+ ○ Compiling /api/workflow/step1 ...
+ ✓ Compiled /api/workflow/step1 in 699ms (1102 modules)
+ POST /api/workflow/step1 401 in 848ms
+ POST /api/waitlist 400 in 68ms
+ POST /api/workflow/step1 401 in 54ms
+ ○ Compiling /api/workflow/step1/clarify ...
+ ✓ Compiled /api/workflow/step1/clarify in 595ms (1104 modules)
+ POST /api/workflow/step1/clarify 401 in 703ms
+ ○ Compiling /api/workflow/step2 ...
+ ✓ Compiled /api/workflow/step2 in 644ms (1107 modules)
+ POST /api/workflow/step2 401 in 781ms
+ ○ Compiling /api/workflow/step2/clarify ...
+ ✓ Compiled /api/workflow/step2/clarify in 791ms (1109 modules)
+ POST /api/workflow/step2/clarify 401 in 936ms
+ ○ Compiling /api/workflow/step3 ...
+ ✓ Compiled /api/workflow/step3 in 746ms (1112 modules)
+ POST /api/workflow/step3 401 in 873ms
+ ○ Compiling /api/workflow/step3/clarify ...
+ ✓ Compiled /api/workflow/step3/clarify in 599ms (1114 modules)
+ POST /api/workflow/step3/clarify 401 in 688ms
+ ○ Compiling /api/workflow/step4 ...
+ ✓ Compiled /api/workflow/step4 in 566ms (1117 modules)
+ POST /api/workflow/step4 401 in 665ms
+ ○ Compiling /api/workflow/step4/clarify ...
+ ✓ Compiled /api/workflow/step4/clarify in 686ms (1119 modules)
+ POST /api/workflow/step4/clarify 401 in 805ms
+ ○ Compiling /api/workflow/step5 ...
+ ✓ Compiled /api/workflow/step5 in 655ms (1122 modules)
+ POST /api/workflow/step5 401 in 740ms
+ ○ Compiling /api/workflow/step5/clarify ...
+ ✓ Compiled /api/workflow/step5/clarify in 553ms (1124 modules)
+ POST /api/workflow/step5/clarify 401 in 677ms
+ ○ Compiling /api/workflow/step6 ...
+ ✓ Compiled /api/workflow/step6 in 615ms (1127 modules)
+ POST /api/workflow/step6 401 in 707ms
+ ○ Compiling /api/workflow/step6/clarify ...
+ ✓ Compiled /api/workflow/step6/clarify in 817ms (1129 modules)
+ POST /api/workflow/step6/clarify 401 in 898ms
+ ○ Compiling /api/workflow/step7 ...
+ ✓ Compiled /api/workflow/step7 in 581ms (1131 modules)
+ POST /api/workflow/step7 401 in 714ms
+ ○ Compiling /api/workflow/step7/clarify ...
+ ✓ Compiled /api/workflow/step7/clarify in 806ms (1133 modules)
+ POST /api/workflow/step7/clarify 401 in 929ms
+ ○ Compiling /api/workflow/step8 ...
+ ✓ Compiled /api/workflow/step8 in 613ms (1135 modules)
+ POST /api/workflow/step8 401 in 704ms
+ ○ Compiling /api/workflow/step8/clarify ...
+ ✓ Compiled /api/workflow/step8/clarify in 996ms (1137 modules)
+ POST /api/workflow/step8/clarify 401 in 1079ms
+ ○ Compiling /api/workflow/step9 ...
+ ✓ Compiled /api/workflow/step9 in 573ms (1139 modules)
+ POST /api/workflow/step9 401 in 677ms
+ ○ Compiling /api/workflow/step9/clarify ...
+ ✓ Compiled /api/workflow/step9/clarify in 812ms (1141 modules)
+ POST /api/workflow/step9/clarify 401 in 1067ms
+ ○ Compiling /pricing ...
+ ✓ Compiled /pricing in 2.7s (2058 modules)
+ GET /pricing 200 in 2936ms
+ ○ Compiling /payment/success ...
+ ✓ Compiled /payment/success in 1466ms (2068 modules)
+ GET /payment/success 200 in 1662ms
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 1518ms (174 modules)
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 102ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 248ms
+ ○ Compiling /api/export/[id] ...
+ ✓ Compiled /api/export/[id] in 2s (1161 modules)
+ GET /api/export/test-id 401 in 3575ms
+ ○ Compiling /api/projects/progress ...
+ ✓ Compiled /api/projects/progress in 1265ms (1163 modules)
+ GET /api/projects/progress 401 in 1473ms
+ ○ Compiling /api/stripe/checkout-session ...
+ ✓ Compiled /api/stripe/checkout-session in 5.6s (1362 modules)
+ POST /api/stripe/checkout-session 401 in 6148ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1867ms (2274 modules)
+ GET /nonexistent-page 404 in 2200ms
+ POST /api/workflow/step1 401 in 174ms
+ GET /api/projects 401 in 133ms
+ GET /api/workflow/step1 405 in 130ms
+ ○ Compiling /api/user/subscription ...
+ ✓ Compiled /api/user/subscription in 1444ms (1366 modules)
+ GET /api/user/subscription 401 in 1715ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 110ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 961ms
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at parseJSONFromBytes (node:internal/deps/undici/undici:5738:19)
+    at successSteps (node:internal/deps/undici/undici:5719:27)
+    at fullyReadBody (node:internal/deps/undici/undici:4609:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async consumeBody (node:internal/deps/undici/undici:5728:7)
+    at async getBody (webpack-internal:///(rsc)/./node_modules/next-auth/next/utils.js:29:12)
+    at async NextAuthRouteHandler (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:56:16)
+    at async NextAuth._args$ (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:89:16)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:57228
+    at async eT.execute (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:46851)
+    at async eT.handle (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:58760)
+    at async doRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1576:40)
+    at async DevServer.renderToResponseWithComponentsImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1496:28)
+    at async DevServer.renderPageComponent (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:818:17)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/home/mcsp/vibetoapp/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/start-server.js:141:13)
+ POST /api/auth/csrf 500 in 65ms
+ GET / 200 in 196ms
+ GET /api/waitlist 200 in 109ms
+ ✓ Compiled in 1459ms (925 modules)
+ POST /api/waitlist 400 in 49ms
+ GET /api/auth/csrf 200 in 104ms
+ GET /api/workflow/step1 405 in 48ms
+ POST /api/workflow/step1 401 in 47ms
+ GET / 200 in 248ms
+ GET /auth/signin 200 in 82ms
+ GET /auth/signup 200 in 99ms
+ GET /auth/error 200 in 149ms
+ GET /api/projects 401 in 71ms
+ POST /api/workflow/step1 401 in 41ms
+ POST /api/waitlist 400 in 46ms
+ POST /api/workflow/step1 401 in 39ms
+ POST /api/workflow/step1/clarify 401 in 60ms
+ POST /api/workflow/step2 401 in 54ms
+ POST /api/workflow/step2/clarify 401 in 57ms
+ POST /api/workflow/step3 401 in 57ms
+ POST /api/workflow/step3/clarify 401 in 37ms
+ POST /api/workflow/step4 401 in 58ms
+ POST /api/workflow/step4/clarify 401 in 45ms
+ POST /api/workflow/step5 401 in 36ms
+ POST /api/workflow/step5/clarify 401 in 34ms
+ POST /api/workflow/step6 401 in 61ms
+ POST /api/workflow/step6/clarify 401 in 36ms
+ POST /api/workflow/step7 401 in 51ms
+ POST /api/workflow/step7/clarify 401 in 33ms
+ POST /api/workflow/step8 401 in 46ms
+ POST /api/workflow/step8/clarify 401 in 69ms
+ POST /api/workflow/step9 401 in 70ms
+ POST /api/workflow/step9/clarify 401 in 35ms
+ GET /pricing 200 in 109ms
+ GET /payment/success 200 in 75ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 60ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 148ms
+ GET /api/export/test-id 401 in 87ms
+ GET /api/projects/progress 401 in 80ms
+ POST /api/stripe/checkout-session 401 in 175ms
+ GET /nonexistent-page 404 in 76ms
+ POST /api/workflow/step1 401 in 61ms
+ GET /api/projects 401 in 52ms
+ GET /api/workflow/step1 405 in 46ms
+ GET /api/user/subscription 401 in 49ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 60ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 134ms
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at parseJSONFromBytes (node:internal/deps/undici/undici:5738:19)
+    at successSteps (node:internal/deps/undici/undici:5719:27)
+    at fullyReadBody (node:internal/deps/undici/undici:4609:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async consumeBody (node:internal/deps/undici/undici:5728:7)
+    at async getBody (webpack-internal:///(rsc)/./node_modules/next-auth/next/utils.js:29:12)
+    at async NextAuthRouteHandler (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:56:16)
+    at async NextAuth._args$ (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:89:16)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:57228
+    at async eT.execute (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:46851)
+    at async eT.handle (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:58760)
+    at async doRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1576:40)
+    at async DevServer.renderToResponseWithComponentsImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1496:28)
+    at async DevServer.renderPageComponent (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:818:17)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/home/mcsp/vibetoapp/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/start-server.js:141:13)
+ POST /api/auth/csrf 500 in 57ms
+ GET / 200 in 112ms
+ GET /api/waitlist 200 in 82ms
+ ✓ Compiled in 1185ms (925 modules)
+Would send welcome email to: newtest@example.com Position: 2
+ POST /api/waitlist 200 in 81ms
+ GET / 200 in 167ms
+ GET /auth/signin 200 in 142ms
+ GET /auth/signup 200 in 123ms
+ GET /auth/error 200 in 95ms
+ GET /api/projects 401 in 67ms
+ POST /api/workflow/step1 401 in 63ms
+ POST /api/waitlist 400 in 97ms
+ POST /api/workflow/step1 401 in 81ms
+ POST /api/workflow/step1/clarify 401 in 66ms
+ POST /api/workflow/step2 401 in 81ms
+ POST /api/workflow/step2/clarify 401 in 50ms
+ POST /api/workflow/step3 401 in 93ms
+ POST /api/workflow/step3/clarify 401 in 93ms
+ POST /api/workflow/step4 401 in 71ms
+ POST /api/workflow/step4/clarify 401 in 51ms
+ POST /api/workflow/step5 401 in 43ms
+ POST /api/workflow/step5/clarify 401 in 52ms
+ POST /api/workflow/step6 401 in 47ms
+ POST /api/workflow/step6/clarify 401 in 35ms
+ POST /api/workflow/step7 401 in 58ms
+ POST /api/workflow/step7/clarify 401 in 37ms
+ POST /api/workflow/step8 401 in 84ms
+ POST /api/workflow/step8/clarify 401 in 73ms
+ POST /api/workflow/step9 401 in 102ms
+ POST /api/workflow/step9/clarify 401 in 97ms
+ GET /pricing 200 in 166ms
+ GET /payment/success 200 in 166ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 88ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 129ms
+ GET /api/export/test-id 401 in 106ms
+ GET /api/projects/progress 401 in 95ms
+ POST /api/stripe/checkout-session 401 in 84ms
+ GET /nonexistent-page 404 in 125ms
+ POST /api/workflow/step1 401 in 83ms
+ GET /api/projects 401 in 105ms
+ GET /api/workflow/step1 405 in 69ms
+ GET /api/user/subscription 401 in 68ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 55ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 123ms
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at parseJSONFromBytes (node:internal/deps/undici/undici:5738:19)
+    at successSteps (node:internal/deps/undici/undici:5719:27)
+    at fullyReadBody (node:internal/deps/undici/undici:4609:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async consumeBody (node:internal/deps/undici/undici:5728:7)
+    at async getBody (webpack-internal:///(rsc)/./node_modules/next-auth/next/utils.js:29:12)
+    at async NextAuthRouteHandler (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:56:16)
+    at async NextAuth._args$ (webpack-internal:///(rsc)/./node_modules/next-auth/next/index.js:89:16)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:57228
+    at async eT.execute (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:46851)
+    at async eT.handle (/home/mcsp/vibetoapp/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:58760)
+    at async doRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1576:40)
+    at async DevServer.renderToResponseWithComponentsImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1496:28)
+    at async DevServer.renderPageComponent (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/base-server.js:818:17)
+    at async /home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/home/mcsp/vibetoapp/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/home/mcsp/vibetoapp/node_modules/next/dist/server/lib/start-server.js:141:13)
+ POST /api/auth/csrf 500 in 85ms
+ GET / 200 in 222ms
+ GET /api/waitlist 200 in 97ms
+ ✓ Compiled in 1344ms (925 modules)
+ ✓ Compiled in 1264ms (923 modules)
+ POST /api/projects 401 in 33ms
+ ✓ Compiled in 1549ms (923 modules)
+ ✓ Compiled in 688ms (923 modules)
+ GET /api/auth/csrf 200 in 50ms
+ POST /api/auth/callback/credentials 302 in 101ms
+ GET /api/auth/error?error=Invalid%20credentials 302 in 37ms
+ GET /auth/error?error=Invalid%20credentials 200 in 81ms
+ ✓ Compiled in 1187ms (923 modules)
+ ✓ Compiled in 734ms (923 modules)
+ ○ Compiling /api/auth/register ...
+ ✓ Compiled /api/auth/register in 1484ms (112 modules)
+ POST /api/auth/register 200 in 2577ms
+ ✓ Compiled /api/auth/[...nextauth] in 196ms (350 modules)
+ GET /api/auth/csrf 200 in 405ms
+ POST /api/auth/callback/credentials 302 in 959ms
+ GET /api/auth/signin?callbackUrl=%2Fdashboard 302 in 66ms
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 1479ms (1004 modules)
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fdashboard 200 in 1875ms
+ ✓ Compiled in 1119ms (923 modules)
+ ✓ Compiled in 769ms (923 modules)
+ ✓ Compiled in 1409ms (923 modules)
+ ✓ Compiled in 682ms (923 modules)
+ ✓ Compiled in 486ms (923 modules)
+ ✓ Compiled in 678ms (923 modules)
+ ✓ Compiled in 1291ms (923 modules)
+ ✓ Compiled in 318ms (923 modules)
+ ✓ Compiled in 518ms (923 modules)
+ ✓ Compiled in 498ms (923 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 680ms (773 modules)
+ GET / 200 in 931ms
+ ✓ Compiled in 597ms (923 modules)
+ GET / 200 in 60ms
+ ○ Compiling /pricing ...
+ ✓ Compiled /pricing in 756ms (786 modules)
+ GET /pricing 200 in 967ms
+ ✓ Compiled /payment/success in 209ms (792 modules)
+ GET /payment/success 200 in 372ms
+ ✓ Compiled /auth/signin in 218ms (798 modules)
+ GET /auth/signin 200 in 323ms
+ ✓ Compiled /auth/signup in 225ms (803 modules)
+ GET /auth/signup 200 in 319ms
+ ✓ Compiled /auth/error in 222ms (807 modules)
+ GET /auth/error 200 in 316ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 657ms (1049 modules)
+ GET /api/auth/providers 200 in 828ms
+ ✓ Compiled /api/waitlist in 305ms (1084 modules)
+ GET /api/waitlist 200 in 453ms
+ GET /api/auth/csrf 200 in 71ms
+ ✓ Compiled /favicon.ico in 267ms (1113 modules)
+ GET /favicon.ico 200 in 369ms
+ GET / 200 in 153ms
+ GET / 200 in 54ms
+ GET / 200 in 62ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 585ms (2025 modules)
+ GET /nonexistent-page-12345 404 in 712ms
+ POST /api/waitlist 400 in 65ms
+ ✓ Compiled in 310ms (925 modules)
+ GET / 200 in 75ms
+ GET / 200 in 60ms
+ ✓ Compiled in 540ms (923 modules)
+ ✓ Compiled in 267ms (923 modules)
+ ✓ Compiled in 272ms (923 modules)
+ GET / 200 in 64ms
+ GET /pricing 200 in 55ms
+ GET /payment/success 200 in 60ms
+ GET /auth/signin 200 in 68ms
+ GET /auth/signup 200 in 47ms
+ GET /auth/error 200 in 52ms
+ GET /api/auth/providers 200 in 40ms
+ GET /api/waitlist 200 in 30ms
+ GET /api/auth/csrf 200 in 41ms
+ GET /favicon.ico 200 in 34ms
+ GET / 200 in 52ms
+ GET / 200 in 51ms
+ GET / 200 in 51ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 591ms (2025 modules)
+ GET /nonexistent-page-12345 404 in 668ms
+ POST /api/waitlist 400 in 39ms
+ ✓ Compiled in 291ms (925 modules)
+ GET / 200 in 66ms
+ GET /pricing 200 in 50ms
+ ✓ Compiled in 306ms (925 modules)
+ ✓ Compiled in 257ms (925 modules)
+ ✓ Compiled in 319ms (925 modules)
+ ✓ Compiled in 423ms (925 modules)
+ GET /payment/success 200 in 49ms
+ ✓ Compiled in 290ms (925 modules)
+ ✓ Compiled in 256ms (925 modules)
+ ✓ Compiled in 278ms (925 modules)
+ ✓ Compiled in 266ms (925 modules)
+ GET / 200 in 53ms
+ GET /pricing 200 in 54ms
+ GET /payment/success 200 in 48ms
+ GET /auth/signin 200 in 55ms
+ GET /auth/signup 200 in 50ms
+ GET /auth/error 200 in 46ms
+ GET /api/auth/providers 200 in 49ms
+ GET /api/waitlist 200 in 32ms
+ GET /api/auth/csrf 200 in 27ms
+ GET /favicon.ico 200 in 32ms
+ GET / 200 in 63ms
+ GET / 200 in 62ms
+ GET / 200 in 72ms
+ GET /nonexistent-page-12345 404 in 39ms
+ POST /api/waitlist 400 in 33ms
+ ✓ Compiled in 369ms (925 modules)
+[?25h

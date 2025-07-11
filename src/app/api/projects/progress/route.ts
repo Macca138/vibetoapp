@@ -26,19 +26,32 @@ interface ProjectProgressData {
 }
 
 // Calculate estimated time remaining based on current progress
-function calculateEstimatedTime(completedSteps: number, totalSteps: number, startedAt: Date): number {
-  if (completedSteps === 0) {
-    // If no steps completed, estimate based on average time per step (15 minutes)
-    return totalSteps * 15;
+function calculateEstimatedTime(completedSteps: number, totalSteps: number, startedAt: Date): number | undefined {
+  // Don't show estimates for projects that haven't made meaningful progress
+  if (completedSteps < 2) {
+    return undefined;
   }
 
   const now = new Date();
   const timeSpentInHours = (now.getTime() - startedAt.getTime()) / (1000 * 60 * 60);
-  const averageTimePerStep = (timeSpentInHours / completedSteps) * 60; // Convert to minutes
-  const remainingSteps = totalSteps - completedSteps;
   
-  // Cap the estimate at a reasonable maximum (4 hours)
-  return Math.min(remainingSteps * averageTimePerStep, 240);
+  // Only calculate if significant time has passed (at least 30 minutes)
+  if (timeSpentInHours < 0.5) {
+    return undefined;
+  }
+
+  // Use a more conservative approach - assume 15-30 minutes per remaining step
+  const remainingSteps = totalSteps - completedSteps;
+  const estimatedMinutesPerStep = Math.max(15, Math.min(30, (timeSpentInHours / completedSteps) * 60));
+  
+  const estimate = remainingSteps * estimatedMinutesPerStep;
+  
+  // Don't show unrealistic estimates (over 3 hours)
+  if (estimate > 180) {
+    return undefined;
+  }
+  
+  return estimate;
 }
 
 // Calculate progress for a single project
@@ -61,10 +74,10 @@ async function calculateProjectProgress(project: any): Promise<ProjectProgressDa
     };
   });
 
-  // Determine last activity
+  // Determine last activity - only show if there's actual workflow activity
   const lastActivity = workflowResponses.length > 0
     ? new Date(Math.max(...workflowResponses.map((r: any) => new Date(r.updatedAt).getTime())))
-    : project.updatedAt;
+    : undefined;
 
   // Calculate estimated time remaining
   const estimatedTimeRemaining = project.workflow && !project.workflow.isCompleted

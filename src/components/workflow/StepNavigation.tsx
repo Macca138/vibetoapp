@@ -14,6 +14,7 @@ interface StepNavigationProps {
 
 export default function StepNavigation({ 
   workflow, 
+  currentStep,
   onStepClick, 
   className = '' 
 }: StepNavigationProps) {
@@ -21,7 +22,7 @@ export default function StepNavigation({
     <nav className={`${className}`}>
       <ol className="space-y-2">
         {WORKFLOW_STEPS.map((step, index) => {
-          const status = getStepStatus(step.id, workflow);
+          const status = getStepStatus(step.id, { ...workflow, currentStep });
           const isClickable = status !== 'locked';
           
           return (
@@ -34,28 +35,28 @@ export default function StepNavigation({
               <button
                 onClick={() => isClickable && onStepClick(step.id)}
                 disabled={!isClickable}
-                className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                className={`group w-full text-left p-3 rounded-lg transition-all duration-200 ${
                   status === 'current'
-                    ? 'bg-indigo-100 border-2 border-indigo-500 shadow-md'
+                    ? 'bg-indigo-100 border-2 border-indigo-500 shadow-md cursor-pointer'
                     : status === 'completed'
-                    ? 'bg-green-100 border border-green-300 hover:bg-green-150'
+                    ? 'bg-green-100 border border-green-300 hover:bg-green-150 hover:border-green-400 hover:shadow-md cursor-pointer transform hover:scale-[1.02]'
                     : status === 'available'
-                    ? 'bg-white border-2 border-gray-300 hover:bg-gray-50 shadow-sm'
+                    ? 'bg-white border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 shadow-sm cursor-pointer transform hover:scale-[1.02]'
                     : 'bg-gray-50 border border-gray-300 opacity-60 cursor-not-allowed'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200 ${
                     status === 'current'
                       ? 'bg-indigo-600 text-white'
                       : status === 'completed'
-                      ? 'bg-green-600 text-white'
+                      ? 'bg-green-600 text-white group-hover:bg-green-700 group-hover:scale-110'
                       : status === 'available'
-                      ? 'bg-gray-600 text-white'
+                      ? 'bg-gray-600 text-white group-hover:bg-gray-700'
                       : 'bg-gray-400 text-gray-100'
                   }`}>
                     {status === 'completed' ? (
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     ) : (

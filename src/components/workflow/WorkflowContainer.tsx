@@ -9,6 +9,7 @@ import { getWorkflowStep } from '@/lib/workflow/config';
 import { getNavigationState, calculateProgress } from '@/lib/workflow/navigation';
 import { ProjectWorkflow as ProjectWorkflowType } from '@/lib/workflow/types';
 import WorkflowStep from './WorkflowStep';
+import ChatWindow from './ChatWindow';
 import StepNavigation from './StepNavigation';
 import ProgressBar from './ProgressBar';
 
@@ -48,6 +49,8 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
 
   // Initialize workflow data
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'auto' });
     if (project.workflow) {
       const workflowData: ProjectWorkflowType = {
         projectId: project.id,
@@ -104,7 +107,7 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
     }
   };
 
-  const handleStepSave = async (responses: Record<string, any>, isComplete: boolean) => {
+  const handleStepSave = async (stepData: any) => {
     if (!workflow) return;
 
     setIsLoading(true);
@@ -113,8 +116,8 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          responses,
-          completed: isComplete,
+          responses: stepData,
+          completed: true,
         }),
       });
 
@@ -127,15 +130,15 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
           const updatedResponses = prev.responses.filter(r => r.stepId !== currentStep);
           updatedResponses.push({
             stepId: currentStep,
-            responses,
-            completed: isComplete,
+            responses: stepData,
+            completed: true,
             lastUpdated: new Date(),
           });
           
           return {
             ...prev,
             responses: updatedResponses,
-            currentStep: isComplete ? Math.min(currentStep + 1, 9) : prev.currentStep,
+            currentStep: Math.min(currentStep + 1, 9),
           };
         });
       }
@@ -147,6 +150,9 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
   };
 
   const handleStepNavigation = async (stepId: number) => {
+    // Scroll to top when navigating to a new step
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     if (workflow && stepId >= 1 && stepId <= 9) {
       // Check if we need to process data flow when navigating to a new step
       const targetStepResponse = workflow.responses.find(r => r.stepId === stepId);
@@ -175,6 +181,11 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
       }
       
       setCurrentStep(stepId);
+      
+      // Update URL to reflect current step
+      const url = new URL(window.location.href);
+      url.searchParams.set('step', stepId.toString());
+      window.history.pushState({}, '', url.toString());
     }
   };
 
@@ -264,16 +275,15 @@ export default function WorkflowContainer({ project }: WorkflowContainerProps) {
           {/* Main Content */}
           <div className="lg:col-span-3">
             <div className="bg-white shadow-md rounded-lg border border-gray-200 p-6 lg:p-8">
-              <WorkflowStep
-                step={currentStepData}
+              <ChatWindow
+                stepId={currentStep}
+                stepTitle={currentStepData.title}
+                stepDescription={currentStepData.description}
                 projectId={project.id}
-                response={currentStepResponse}
-                onSave={handleStepSave}
+                initialData={currentStepResponse?.responses}
+                onStepComplete={handleStepSave}
                 onNext={handleNext}
                 onPrevious={handlePrevious}
-                canGoNext={navigationState.canGoNext}
-                canGoPrevious={navigationState.canGoPrevious}
-                isLoading={isLoading}
               />
             </div>
           </div>

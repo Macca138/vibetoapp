@@ -216,7 +216,7 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date()
       },
       create: {
-        workflowId: projectWorkflow.id,
+        workflowId: projectWorkflowRecord.id,
         stepId: 9,
         responses: workflowData,
         completed: true,

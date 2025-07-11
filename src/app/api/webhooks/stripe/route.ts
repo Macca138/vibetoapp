@@ -26,7 +26,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
       },
       data: {
         status: 'succeeded',
-        stripePaymentId: session.payment_intent as string,
+        stripePaymentId: typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id || '',
         updatedAt: new Date(),
       },
     });
@@ -44,11 +44,13 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
       
     } else if (type?.includes('subscription')) {
       // Handle subscription creation
-      const subscription = session.subscription as string;
+      const subscription = typeof session.subscription === 'string' ? session.subscription : session.subscription?.id;
       
       if (subscription) {
         await prisma.userSubscription.upsert({
-          where: { userId },
+          where: { 
+            stripeSubscriptionId: subscription 
+          },
           update: {
             stripeSubscriptionId: subscription,
             status: 'active',
@@ -78,11 +80,11 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 }
 
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
-  const customerId = invoice.customer as string;
-  const subscriptionId = invoice.subscription as string;
+  const customerId = typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id;
+  const subscriptionId = (invoice as any).subscription;
 
-  if (!subscriptionId) {
-    console.error('No subscription ID found in invoice');
+  if (!subscriptionId || !customerId) {
+    console.error('No subscription ID or customer ID found in invoice');
     return;
   }
 
@@ -102,8 +104,8 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
       where: { id: userSubscription.id },
       data: {
         status: 'active',
-        currentPeriodStart: invoice.period_start ? new Date(invoice.period_start * 1000) : undefined,
-        currentPeriodEnd: invoice.period_end ? new Date(invoice.period_end * 1000) : undefined,
+        currentPeriodStart: invoice.lines.data[0]?.period?.start ? new Date(invoice.lines.data[0].period.start * 1000) : undefined,
+        currentPeriodEnd: invoice.lines.data[0]?.period?.end ? new Date(invoice.lines.data[0].period.end * 1000) : undefined,
         updatedAt: new Date(),
       },
     });
@@ -112,7 +114,7 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
     await prisma.paymentRecord.create({
       data: {
         userId: userSubscription.userId,
-        stripePaymentId: invoice.payment_intent as string || `invoice_${invoice.id}`,
+        stripePaymentId: typeof (invoice as any).payment_intent === 'string' ? (invoice as any).payment_intent : ((invoice as any).payment_intent?.id || `invoice_${invoice.id}`),
         amount: invoice.amount_paid,
         currency: invoice.currency,
         status: 'succeeded',
@@ -120,8 +122,8 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
         metadata: {
           invoiceId: invoice.id,
           subscriptionId,
-          periodStart: invoice.period_start,
-          periodEnd: invoice.period_end,
+          periodStart: invoice.lines.data[0]?.period?.start,
+          periodEnd: invoice.lines.data[0]?.period?.end,
         },
       },
     });
@@ -134,8 +136,13 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  const customerId = invoice.customer as string;
-  const subscriptionId = invoice.subscription as string;
+  const customerId = typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id;
+  const subscriptionId = (invoice as any).subscription;
+
+  if (!customerId) {
+    console.error('No customer ID found in failed payment event');
+    return;
+  }
 
   try {
     // Find user by Stripe customer ID
@@ -161,7 +168,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
     await prisma.paymentRecord.create({
       data: {
         userId: userSubscription.userId,
-        stripePaymentId: invoice.payment_intent as string || `failed_invoice_${invoice.id}`,
+        stripePaymentId: typeof (invoice as any).payment_intent === 'string' ? (invoice as any).payment_intent : ((invoice as any).payment_intent?.id || `failed_invoice_${invoice.id}`),
         amount: invoice.amount_due,
         currency: invoice.currency,
         status: 'failed',
@@ -182,7 +189,12 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
 }
 
 async function handleCustomerSubscriptionUpdated(subscription: Stripe.Subscription) {
-  const customerId = subscription.customer as string;
+  const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer?.id;
+
+  if (!customerId) {
+    console.error('No customer ID found in subscription update event');
+    return;
+  }
 
   try {
     // Find user by Stripe customer ID
@@ -201,8 +213,8 @@ async function handleCustomerSubscriptionUpdated(subscription: Stripe.Subscripti
       data: {
         status: subscription.status,
         stripePriceId: subscription.items.data[0]?.price.id,
-        currentPeriodStart: new Date(subscription.current_period_start * 1000),
-        currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+        currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
         cancelAtPeriodEnd: subscription.cancel_at_period_end,
         updatedAt: new Date(),
       },
@@ -216,7 +228,12 @@ async function handleCustomerSubscriptionUpdated(subscription: Stripe.Subscripti
 }
 
 async function handleCustomerSubscriptionDeleted(subscription: Stripe.Subscription) {
-  const customerId = subscription.customer as string;
+  const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer?.id;
+
+  if (!customerId) {
+    console.error('No customer ID found in subscription deletion event');
+    return;
+  }
 
   try {
     // Find user by Stripe customer ID

@@ -75,10 +75,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 3,
-    title: 'Identify Target Users',
-    description: 'Discover and define your ideal users with AI-powered persona generation.',
-    prompt: 'Who will use your app? Let\'s create detailed user personas.',
-    aiPrompt: 'Help the user identify and define their target audience with detailed user personas.',
+    title: 'High Level Technical Architecture',
+    description: 'Design the overall technical structure and system architecture for your application.',
+    prompt: 'Let\'s brainstorm the technical architecture and system design for your app.',
+    aiPrompt: 'Help the user design a comprehensive technical architecture based on their requirements.',
     fields: [
       {
         id: 'primaryAudience',
@@ -118,10 +118,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 4,
-    title: 'Feature Discovery',
-    description: 'Brainstorm and prioritize features that deliver maximum value to your users.',
-    prompt: 'Let\'s explore all the features your app could have and prioritize them.',
-    aiPrompt: 'Help the user brainstorm comprehensive features and prioritize them based on user value and implementation complexity.',
+    title: 'Feature Stories & UX Flows',
+    description: 'Create detailed user stories and UX flows for your app features.',
+    prompt: 'Let\'s create user stories and detailed UX flows for your features.',
+    aiPrompt: 'Help the user create comprehensive user stories and detailed UX flow specifications.',
     fields: [
       {
         id: 'mustHaveFeatures',
@@ -160,10 +160,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 5,
-    title: 'User Flow Mapping',
-    description: 'Create intuitive user journeys and interaction flows for seamless experiences.',
-    prompt: 'Let\'s map out how users will navigate through your app.',
-    aiPrompt: 'Help the user design intuitive user flows and identify all the steps users take to accomplish their goals.',
+    title: 'Design System & Style Guide',
+    description: 'Create a comprehensive visual identity and design system for your app.',
+    prompt: 'Let\'s create a complete design system and style guide for your app.',
+    aiPrompt: 'Help the user create a comprehensive design system with colors, typography, and components.',
     fields: [
       {
         id: 'userJourney',
@@ -204,10 +204,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 6,
-    title: 'Technical Architecture',
-    description: 'Get AI recommendations for tech stack, integrations, and system design.',
-    prompt: 'Let\'s determine the technical requirements and architecture for your app.',
-    aiPrompt: 'Provide technical recommendations for the app\'s architecture, tech stack, and infrastructure based on the requirements.',
+    title: 'Screen States Specification',
+    description: 'Define detailed screen layouts and states for each feature.',
+    prompt: 'Let\'s specify the detailed screen layouts and states for your app features.',
+    aiPrompt: 'Help the user create detailed screen state specifications with responsive design considerations.',
     fields: [
       {
         id: 'platformChoice',
@@ -254,10 +254,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 7,
-    title: 'Revenue Model',
-    description: 'Explore monetization strategies tailored to your app and target market.',
-    prompt: 'How will your app generate revenue? Let\'s explore different monetization strategies.',
-    aiPrompt: 'Help the user choose the most appropriate monetization strategy based on their app type and target audience.',
+    title: 'Comprehensive Technical Specification',
+    description: 'Create a detailed technical specification document for development.',
+    prompt: 'Let\'s create a comprehensive technical specification ready for development.',
+    aiPrompt: 'Help the user create a complete technical specification with implementation details.',
     fields: [
       {
         id: 'revenueModel',
@@ -304,10 +304,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 8,
-    title: 'MVP Definition',
-    description: 'Define your minimum viable product with clear milestones and priorities.',
-    prompt: 'Let\'s define what your MVP should include and create a development roadmap.',
-    aiPrompt: 'Help the user define a realistic MVP scope and create a development timeline with clear milestones.',
+    title: 'Development Rules Integration',
+    description: 'Apply best practices and development standards for your tech stack.',
+    prompt: 'Let\'s integrate development rules and coding standards for your project.',
+    aiPrompt: 'Help the user apply appropriate development rules and best practices for their tech stack.',
     fields: [
       {
         id: 'mvpScope',
@@ -355,10 +355,10 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
   },
   {
     id: 9,
-    title: 'Export & Execute',
-    description: 'Export your complete app specification in multiple formats ready for development.',
-    prompt: 'Congratulations! Let\'s package everything into actionable documentation.',
-    aiPrompt: 'Generate comprehensive documentation and next steps based on all the user\'s responses.',
+    title: 'Implementation Planning',
+    description: 'Break down the technical specification into detailed, actionable development tasks.',
+    prompt: 'Let\'s create a detailed implementation plan with step-by-step development tasks.',
+    aiPrompt: 'Help the user create a granular implementation plan with AI-friendly task breakdown.',
     fields: [
       {
         id: 'documentFormat',

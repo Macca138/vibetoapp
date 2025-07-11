@@ -67,6 +67,24 @@ export default function ProjectList({ onProjectCreated }: ProjectListProps) {
     router.push(`/projects/${projectId}?step=${stepId}`);
   };
 
+  const handleDelete = async (projectId: string) => {
+    try {
+      const response = await fetch(`/api/projects/${projectId}`, {
+        method: 'DELETE',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete project');
+      }
+      
+      // Refresh the project list
+      fetchProjects();
+    } catch (err) {
+      console.error('Error deleting project:', err);
+      setError(err instanceof Error ? err.message : 'Failed to delete project');
+    }
+  };
+
   useEffect(() => {
     fetchProjects();
   }, [onProjectCreated]);
@@ -144,6 +162,7 @@ export default function ProjectList({ onProjectCreated }: ProjectListProps) {
             key={project.projectId}
             project={project}
             onResume={handleResume}
+            onDelete={handleDelete}
           />
         ))}
       </div>

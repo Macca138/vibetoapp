@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { m } from 'framer-motion';
-import { Calendar, Clock, CheckCircle, Circle, ArrowRight, Play } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, Circle, ArrowRight, Play, Trash2, MoreVertical } from 'lucide-react';
 
 interface ProjectProgress {
   projectId: string;
@@ -29,13 +29,17 @@ interface ProjectProgress {
 interface ProjectProgressCardProps {
   project: ProjectProgress;
   onResume?: (projectId: string, stepId: number) => void;
+  onDelete?: (projectId: string) => void;
 }
 
 export default function ProjectProgressCard({ 
   project, 
-  onResume 
+  onResume,
+  onDelete
 }: ProjectProgressCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const progressPercentage = (project.completedSteps / project.totalSteps) * 100;
   const nextStep = project.isCompleted ? null : project.currentStep;
@@ -74,6 +78,16 @@ export default function ProjectProgressCard({
     return date.toLocaleDateString();
   };
 
+  const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete(project.projectId);
+    }
+    setShowDeleteConfirm(false);
+    setShowMenu(false);
+  };
+
   return (
     <m.div
       className="group relative"
@@ -84,11 +98,11 @@ export default function ProjectProgressCard({
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link href={`/projects/${project.projectId}`}>
-        <div className="bg-white border border-gray-200 rounded-lg p-6 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
-          {/* Header */}
+      <div className="bg-white border border-gray-200 rounded-lg hover:border-purple-300 hover:shadow-lg transition-all duration-200 relative">
+        {/* Header */}
+        <div className="p-6 pb-4">
           <div className="flex items-start justify-between mb-4">
-            <div className="flex-1 min-w-0">
+            <Link href={`/projects/${project.projectId}`} className="flex-1 min-w-0 cursor-pointer">
               <h3 className="text-lg font-semibold text-gray-900 truncate group-hover:text-purple-600 transition-colors">
                 {project.projectName}
               </h3>
@@ -97,15 +111,48 @@ export default function ProjectProgressCard({
                   {project.description}
                 </p>
               )}
-            </div>
+            </Link>
             
-            <div className={`flex items-center space-x-1 text-sm font-medium ${getStatusColor()}`}>
-              {project.isCompleted ? (
-                <CheckCircle className="w-4 h-4" />
-              ) : (
-                <Circle className="w-4 h-4" />
-              )}
-              <span>{getStatusText()}</span>
+            <div className="flex items-center space-x-2 ml-4">
+              <div className={`flex items-center space-x-1 text-sm font-medium ${getStatusColor()}`}>
+                {project.isCompleted ? (
+                  <CheckCircle className="w-4 h-4" />
+                ) : (
+                  <Circle className="w-4 h-4" />
+                )}
+                <span>{getStatusText()}</span>
+              </div>
+              
+              {/* Actions Menu */}
+              <div className="relative">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowMenu(!showMenu);
+                  }}
+                  className="p-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <MoreVertical className="w-4 h-4 text-gray-400" />
+                </button>
+                
+                {showMenu && (
+                  <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[120px]">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setShowDeleteConfirm(true);
+                        setShowMenu(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center space-x-2 cursor-pointer"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -165,27 +212,24 @@ export default function ProjectProgressCard({
               {project.lastActivity && (
                 <div className="flex items-center space-x-1">
                   <Clock className="w-3 h-3" />
-                  <span>{formatLastActivity(project.lastActivity)}</span>
+                  <span>Last worked {formatLastActivity(project.lastActivity)}</span>
                 </div>
               )}
             </div>
 
-            {!project.isCompleted && (
-              <div className="flex items-center space-x-2">
-                {project.estimatedTimeRemaining && (
-                  <span className="text-orange-600">
-                    ~{formatTimeRemaining(project.estimatedTimeRemaining)} left
-                  </span>
-                )}
-                {nextStep && (
-                  <div className="flex items-center space-x-1 text-purple-600">
-                    <Play className="w-3 h-3" />
-                    <span>Step {nextStep}</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                )}
-              </div>
-            )}
+            <div className="flex items-center space-x-2">
+              {!project.isCompleted && project.estimatedTimeRemaining && (
+                <span className="text-orange-600 text-xs">
+                  ~{formatTimeRemaining(project.estimatedTimeRemaining)} remaining
+                </span>
+              )}
+              {!project.isCompleted && nextStep && (
+                <div className="flex items-center space-x-1 text-purple-600">
+                  <Play className="w-3 h-3" />
+                  <span>Next: Step {nextStep}</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Completion Badge */}
@@ -196,28 +240,62 @@ export default function ProjectProgressCard({
             </div>
           )}
         </div>
-      </Link>
 
-      {/* Hover Actions */}
-      {isHovered && !project.isCompleted && nextStep && (
-        <m.div
-          className="absolute top-4 right-4"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.2 }}
-        >
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onResume?.(project.projectId, nextStep);
-            }}
-            className="bg-purple-600 hover:bg-purple-700 text-white text-xs px-3 py-1 rounded-full shadow-lg transition-colors duration-200 flex items-center space-x-1"
-          >
-            <Play className="w-3 h-3" />
-            <span>Resume</span>
-          </button>
-        </m.div>
+        {/* Footer Actions */}
+        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 rounded-b-lg">
+          <div className="flex items-center justify-between">
+            <Link 
+              href={`/projects/${project.projectId}`}
+              className="text-sm text-purple-600 hover:text-purple-700 font-medium cursor-pointer"
+            >
+              View Project
+            </Link>
+            
+            {!project.isCompleted && nextStep && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onResume?.(project.projectId, nextStep);
+                }}
+                className="bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2 cursor-pointer"
+              >
+                <Play className="w-4 h-4" />
+                <span>Resume Step {nextStep}</span>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete Project</h3>
+            <p className="text-gray-600 mb-4">
+              Are you sure you want to delete "{project.projectName}"? This action cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowDeleteConfirm(false);
+                }}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors cursor-pointer"
+              >
+                Delete Project
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </m.div>
   );

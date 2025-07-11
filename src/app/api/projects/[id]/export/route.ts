@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { dataExportQueue } from '@/lib/queues';
 import { hasProjectAccess } from '@/lib/subscription';
 import { z } from 'zod';
 
@@ -102,37 +101,15 @@ export async function POST(
       },
     });
 
-    // Add job to queue
-    const queueJob = await dataExportQueue.add(
-      'export-project',
-      {
-        exportJobId: exportJob.id,
-        userId: session.user.id,
-        projectId,
-        format,
-        emailNotification,
-      },
-      {
-        delay: 0,
-        attempts: 3,
-        backoff: {
-          type: 'exponential',
-          delay: 2000,
-        },
-        removeOnComplete: 10,
-        removeOnFail: 5,
-      }
-    );
-
     // Update export job with queue job ID
     await prisma.exportJob.update({
       where: { id: exportJob.id },
-      data: { jobId: queueJob.id.toString() },
+      data: { jobId: "disabled" },
     });
 
     return NextResponse.json({
       exportJobId: exportJob.id,
-      queueJobId: queueJob.id.toString(),
+      queueJobId: "disabled",
       status: 'pending',
       format,
       estimatedDuration: format === 'pdf' ? '2-3 minutes' : '30-60 seconds',

@@ -1,0 +1,237 @@
+{
+  "timestamp": "2025-07-11T11:14:04.556Z",
+  "baseUrl": "http://localhost:3000",
+  "totalTests": 44,
+  "passed": 39,
+  "failed": 5,
+  "totalTime": 4406,
+  "errors": [
+    "Waitlist API accepts valid data: ",
+    "Dashboard redirects unauthenticated users: ",
+    "/api/workflow/step1 requires auth: ",
+    "/dashboard requires auth: ",
+    "CSRF endpoint exists: "
+  ],
+  "details": [
+    {
+      "test": "Landing page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Landing page returns HTML",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Contains VibeToApp title",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Contains features section",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Contains CTA section",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Signin page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Signup page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Auth error page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Projects API requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Workflow API requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Waitlist API accepts valid data",
+      "passed": false,
+      "message": ""
+    },
+    {
+      "test": "Step 1 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 1 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 2 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 2 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 3 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 3 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 4 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 4 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 5 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 5 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 6 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 6 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 7 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 7 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 8 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 8 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 9 API endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Step 9 clarify endpoint exists",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Pricing page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Payment success page loads",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Dashboard redirects unauthenticated users",
+      "passed": false,
+      "message": ""
+    },
+    {
+      "test": "Export API requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Progress API requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "Stripe checkout requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "404 page handling",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "API handles malformed requests",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "/api/projects requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "/api/workflow/step1 requires auth",
+      "passed": false,
+      "message": ""
+    },
+    {
+      "test": "/api/user/subscription requires auth",
+      "passed": true,
+      "message": ""
+    },
+    {
+      "test": "/dashboard requires auth",
+      "passed": false,
+      "message": ""
+    },
+    {
+      "test": "CSRF endpoint exists",
+      "passed": false,
+      "message": ""
+    },
+    {
+      "test": "Landing page loads quickly",
+      "passed": true,
+      "message": "Load time: 226ms"
+    },
+    {
+      "test": "API responds quickly",
+      "passed": true,
+      "message": "API time: 109ms"
+    }
+  ]
+}

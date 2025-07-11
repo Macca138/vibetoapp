@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 const projectSchema = z.object({
@@ -17,6 +18,7 @@ export default function CreateProjectForm({
   onProjectCreated,
   onCancel,
 }: CreateProjectFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -65,7 +67,9 @@ export default function CreateProjectForm({
         throw new Error(data.error || "Failed to create project");
       }
 
-      onProjectCreated();
+      const data = await response.json();
+      // Navigate directly to the new project's first step
+      router.push(`/projects/${data.project.id}?step=1`);
       setFormData({ name: "", description: "" });
     } catch (error) {
       setErrors({
